@@ -2200,7 +2200,7 @@
       <value>0</value>
     </param>
     <param>
-      <key>num_NOT_outputs</key>
+      <key>num_CTRL_outputs</key>
       <value>1</value>
     </param>
     <param>
@@ -2627,8 +2627,8 @@
   <connection>
     <source_block_id>quantum_gates_CNOT_0</source_block_id>
     <sink_block_id>quantum_gates_junction_0</sink_block_id>
-    <source_key>NOT_port</source_key>
-    <sink_key>NOT_port</sink_key>
+    <source_key>CTRL_port</source_key>
+    <sink_key>CTRL_port</sink_key>
   </connection>
   <connection>
     <source_block_id>quantum_gates_CNOT_0</source_block_id>

@@ -54,8 +54,8 @@ namespace gr {
       message_port_register_out(message_ports_out());
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"), boost::bind(&gates_junction_impl::handle_cmd_msg, this, _1));
-      message_port_register_in(pmt::mp("NOT_port"));
-      set_msg_handler(pmt::mp("NOT_port"), boost::bind(&gates_junction_impl::handle_NOT_msg, this, _1));
+      message_port_register_in(pmt::mp("CTRL_port"));
+      set_msg_handler(pmt::mp("CTRL_port"), boost::bind(&gates_junction_impl::handle_CTRL_msg, this, _1));
     }
 
     gates_junction_impl::~gates_junction_impl()
@@ -85,7 +85,7 @@ namespace gr {
     }
 
     void
-    gates_junction_impl::handle_NOT_msg(pmt::pmt_t msg)
+    gates_junction_impl::handle_CTRL_msg(pmt::pmt_t msg)
     {
       // add the field and publish
       pmt::pmt_t meta = pmt::car(msg);

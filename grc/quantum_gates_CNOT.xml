@@ -62,8 +62,8 @@
 		<type>real</type>
 	</param>
 	<param>
-		<name>Num NOT Outputs</name>
-		<key>num_NOT_outputs</key>
+		<name>Num CTRL Outputs</name>
+		<key>num_CTRL_outputs</key>
 		<value>1</value>
 		<type>int</type>
 	</param>
@@ -94,9 +94,9 @@
 		<type>message</type>
 	</source>
 	<source>
-		<name>NOT_port</name>
+		<name>CTRL_port</name>
 		<type>message</type>
-		<nports>$num_NOT_outputs</nports>
+		<nports>$num_CTRL_outputs</nports>
 	</source>
 	<source>
 		<name>I_wave</name>

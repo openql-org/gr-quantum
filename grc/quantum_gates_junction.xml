@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <block>
-	<name>NOT Junction Point</name>
+	<name>CTRL Junction Point</name>
 	<key>quantum_gates_junction</key>
 	<category>[Quantum]/gates</category>
 	<import>import quantum</import>
@@ -19,7 +19,7 @@
 		<type>message</type>
 	</sink>
 	<sink>
-		<name>NOT_port</name>
+		<name>CTRL_port</name>
 		<type>message</type>
 	</sink>
 
