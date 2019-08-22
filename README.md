@@ -60,8 +60,7 @@ To compile and install the hierarchical flowgraphs, the script
 
 #### 2量子ビットのゲート
 - CNOT 制御NOTゲート
-- RNOT NOTゲート
-- NULL NOT junction point
+- CTRL junction point
 
 #### 特殊なゲート
 - readout演算子
