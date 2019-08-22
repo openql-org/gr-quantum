@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<block>
+	<name>Qubit Simulator</name>
+	<key>quantum_controllers_Simulator</key>
+	<category>[Quantum]/controllers</category>
+	<import>import quantum</import>
+	<make>quantum.controllers_Simulator($qubit_id, $center_RF, $samp_rate, $scale_rate, $showSyncPort)</make>
+
+	<callback>set_center_RF($center_RF)</callback>
+	<callback>set_time_scale_rate($scale_rate)</callback>
+
+
+	<param>
+		<name>Qubit ID</name>
+		<key>qubit_id</key>
+		<type>real</type>
+	</param>
+	<param>
+		<name>Center Frequency</name>
+		<key>center_RF</key>
+		<value>1000</value>
+		<type>real</type>
+	</param>
+	<param>
+		<name>Sample Rate</name>
+		<key>samples_per_second</key>
+		<value>samp_rate</value>
+		<type>real</type>
+	</param>
+	<param>
+		<name>Time Scale Rate</name>
+		<key>scale_rate</key>
+		<value>1.0</value>
+		<type>float</type>
+	</param>
+	<param>
+		<name>Show Sync Port</name>
+		<key>showSyncPort</key>
+		<value>True</value>
+		<type>enum</type>
+		<hide>part</hide>
+		<option>
+			<name>Yes</name>
+			<key>False</key>
+		</option>
+		<option>
+			<name>No</name>
+			<key>True</key>
+		</option>
+	</param>
+
+
+	<sink>
+		<name>control_wave</name>
+		<type>complex</type>
+	</sink>
+
+	<sink>
+		<name>reqdout_wave</name>
+		<type>complex</type>
+	</sink>
+	<sink>
+		<name>sync_in</name>
+		<type>message</type>
+		<optional>1</optional>
+		<hide>$showSyncPort</hide>
+	</sink>
+
+	<source>
+		<name>measurement</name>
+		<type>complex</type>
+	</source>
+	<source>
+		<name>sync_out</name>
+		<type>message</type>
+		<optional>1</optional>
+		<hide>$showSyncPort</hide>
+	</source>
+
+</block>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<block>
+	<name>Wait</name>
+	<key>quantum_controllers_wait</key>
+	<category>[Quantum]/controllers</category>
+	<import>import quantum</import>
+	<make>quantum.controllers_wait($wait_time)</make>
+	<callback>set_wait_time_ns($wait_time)</callback>
+
+	<param>
+		<name>Wait Time(ns)</name>
+		<key>wait_time</key>
+		<value>0</value>
+		<type>real</type>
+	</param>
+
+	<sink>
+		<name>in</name>
+		<type>message</type>
+	</sink>
+
+	<source>
+		<name>out</name>
+		<type>message</type>
+	</source>
+
+</block>
