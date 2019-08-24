@@ -43,8 +43,7 @@ namespace gr {
     public:
       typedef boost::shared_ptr<gates_T> sptr;
 
-      static sptr make(double I_requency,
-                       double Q_requency,
+      static sptr make(double frequency,
                        double I_amplitude,
                        double Q_amplitude,
                        double I_bandwidth,

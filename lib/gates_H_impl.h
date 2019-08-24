@@ -42,11 +42,10 @@ namespace gr {
       double d_samps_per_tick, d_samps_per_us;
 */
       bool d_WAVE_port;
-      gate *H_gate;
+      gate *d_gate;
 
     public:
-      gates_H_impl(double I_requency,
-                   double Q_requency,
+      gates_H_impl(double frequency,
                    double I_amplitude,
                    double Q_amplitude,
                    double I_bandwidth,

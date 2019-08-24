@@ -45,9 +45,7 @@ namespace gr {
       gate *RO;
 
     public:
-      controllers_readout_impl(
-                   double I_requency,
-                   double Q_requency,
+      controllers_readout_impl(double frequency,
                    double I_amplitude,
                    double Q_amplitude,
                    double I_bandwidth,
@@ -89,6 +87,7 @@ namespace gr {
       bool WAVE_port() const;
 
       void handle_cmd_msg(pmt::pmt_t msg);
+      void handle_FEEDBACK_msg(pmt::pmt_t msg);
 
       int work(int noutput_items,
                gr_vector_const_void_star &input_items,

@@ -63,21 +63,22 @@ namespace gr {
       void set_time_scale_rate(double time_scale_rate);
       double time_scale_rate();
 
-      void set_INIT_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
-      void set_RO_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_INIT_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_RO_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
 
-      void set_X_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
-      void set_Y_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
-      void set_Z_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
-      void set_H_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
-      void set_T_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
-      void set_S_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_X_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_Y_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_Z_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_H_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_T_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
+      void set_S_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec);
 
       void set_SYNC_port(bool is_use);
       bool SYNC_port() const;
 
       void handle_cmd_msg(pmt::pmt_t msg);
       void handle_SYNC_msg(pmt::pmt_t msg);
+      void handle_FEEDBACK_msg(pmt::pmt_t msg);
 
       int work(int noutput_items,
                gr_vector_const_void_star &input_items,

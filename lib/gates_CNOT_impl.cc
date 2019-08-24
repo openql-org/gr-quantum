@@ -34,8 +34,8 @@ namespace gr {
   namespace quantum {
 
     gates_CNOT::sptr
-    gates_CNOT::make(double I_requency,
-                  double Q_requency,
+    gates_CNOT::make(bool DC_mode,
+                  double frequency,
                   double I_amplitude,
                   double Q_amplitude,
                   double I_bandwidth,
@@ -46,8 +46,8 @@ namespace gr {
 
     {
       return gnuradio::get_initial_sptr
-        (new gates_CNOT_impl(I_requency,
-                          Q_requency,
+        (new gates_CNOT_impl(DC_mode,
+                          frequency,
                           I_amplitude,
                           Q_amplitude,
                           I_bandwidth,
@@ -57,8 +57,8 @@ namespace gr {
                           show_WAVE_port));
     }
 
-    gates_CNOT_impl::gates_CNOT_impl(  double I_requency,
-                                 double Q_requency,
+    gates_CNOT_impl::gates_CNOT_impl(bool DC_mode,
+                                 double frequency,
                                  double I_amplitude,
                                  double Q_amplitude,
                                  double I_bandwidth,
@@ -80,11 +80,11 @@ namespace gr {
       set_processing_time_ns(processing_time);
       set_sample_rate(samples_per_second);
 */
-      CNOT = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
+      set_DC_mode(DC_mode);
+      CNOT = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
       set_WAVE_port(show_WAVE_port);
 
 
-      message_port_register_out(message_ports_out());
       message_port_register_out(message_ports_out());
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"), boost::bind(&gates_CNOT_impl::handle_cmd_msg, this, _1));
@@ -200,6 +200,16 @@ namespace gr {
     }
 
 */
+
+    void
+    gates_CNOT_impl::set_DC_mode(bool is_use) {
+        d_DC_mode = !is_use;
+    }
+
+    bool
+    gates_CNOT_impl::DC_mode() const{
+      return d_DC_mode;
+    }
 
     void
     gates_CNOT_impl::set_WAVE_port(bool is_use) {

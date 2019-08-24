@@ -41,12 +41,13 @@ namespace gr {
       double d_proc_time_ns;
       double d_samps_per_tick, d_samps_per_us;
 */
+      bool d_DC_mode;
       bool d_WAVE_port;
       gate *CNOT;
 
     public:
-      gates_CNOT_impl(double I_requency,
-                   double Q_requency,
+      gates_CNOT_impl(bool DC_mode,
+                   double frequency,
                    double I_amplitude,
                    double Q_amplitude,
                    double I_bandwidth,
@@ -83,6 +84,9 @@ namespace gr {
       void set_sample_rate(double rate);
       double sample_rate() const;
 */
+
+      void set_DC_mode(bool is_use);
+      bool DC_mode() const;
 
       void set_WAVE_port(bool is_use);
       bool WAVE_port() const;

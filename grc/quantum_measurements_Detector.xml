@@ -37,7 +37,11 @@
 		<name>result</name>
 		<type>message</type>
 	</source>
-
+	<source>
+		<name>feedback</name>
+		<type>message</type>
+		<optional>1</optional>
+	</source>
 	<source>
 		<name>out</name>
 		<type>complex</type>

@@ -31,8 +31,7 @@
 namespace gr {
   namespace quantum {
 
-    gate::gate(  double I_requency,
-                                 double Q_requency,
+    gate::gate(  double frequency,
                                  double I_amplitude,
                                  double Q_amplitude,
                                  double I_bandwidth,
@@ -40,8 +39,7 @@ namespace gr {
                                  double processing_time
 ,                                double samples_per_sec)
     {
-      set_I_frequency(I_requency);
-      set_Q_frequency(Q_requency);
+      set_frequency(frequency);
       set_I_amplitude(I_amplitude);
       set_Q_amplitude(Q_amplitude);
       set_I_bandwidth(I_bandwidth);
@@ -56,24 +54,13 @@ namespace gr {
 
 
     void
-    gate::set_I_frequency(double freq)
+    gate::set_frequency(double freq)
     {
-      d_I_freq = freq;
+      d_freq = freq;
     }
     double
-    gate::I_frequency() {
-      return d_I_freq;
-    }
-
-    void
-    gate::set_Q_frequency(double freq)
-    {
-      d_Q_freq = freq;
-    }
-    double
-    gate::Q_frequency()
-    {
-      return d_Q_freq;
+    gate::frequency() {
+      return d_freq;
     }
 
     void

@@ -6,25 +6,25 @@
 	<import>import quantum</import>
 	<make>#set $win = 'self._%s_win'%$id
 	quantum.controllers_Coprocessor($qubit_id, $samp_rate, $scale_rate, $showSyncPort)
-	self.$(id).set_X_gete_parameters($X_I_freq, $X_Q_freq, $X_I_amp, $X_Q_amp, $X_I_bw, $X_Q_bw, $X_proc_time, $samp_rate)
-	self.$(id).set_Y_gete_parameters($Y_I_freq, $Y_Q_freq, $Y_I_amp, $Y_Q_amp, $Y_I_bw, $Y_Q_bw, $Y_proc_time, $samp_rate)
-	self.$(id).set_Z_gete_parameters($Z_I_freq, $Z_Q_freq, $Z_I_amp, $Z_Q_amp, $Z_I_bw, $Z_Q_bw, $Z_proc_time, $samp_rate)
-	self.$(id).set_H_gete_parameters($H_I_freq, $H_Q_freq, $H_I_amp, $H_Q_amp, $H_I_bw, $H_Q_bw, $H_proc_time, $samp_rate)
-	self.$(id).set_T_gete_parameters($T_I_freq, $T_Q_freq, $T_I_amp, $T_Q_amp, $T_I_bw, $T_Q_bw, $T_proc_time, $samp_rate)
-	self.$(id).set_S_gete_parameters($S_I_freq, $S_Q_freq, $S_I_amp, $S_Q_amp, $S_I_bw, $S_Q_bw, $S_proc_time, $samp_rate)
-	self.$(id).set_INIT_parameters($INIT_I_freq, $INIT_Q_freq, $INIT_I_amp, $INIT_Q_amp, $INIT_I_bw, $INIT_Q_bw, $INIT_proc_time, $samp_rate)
-	self.$(id).set_RO_parameters($RO_I_freq, $RO_Q_freq, $RO_I_amp, $RO_Q_amp, $RO_I_bw, $RO_Q_bw, $RO_proc_time, $samp_rate)
+	self.$(id).set_X_gete_parameters($X_freq, $X_I_amp, $X_Q_amp, $X_I_bw, $X_Q_bw, $X_proc_time, $samp_rate)
+	self.$(id).set_Y_gete_parameters($Y_freq, $Y_I_amp, $Y_Q_amp, $Y_I_bw, $Y_Q_bw, $Y_proc_time, $samp_rate)
+	self.$(id).set_Z_gete_parameters($Z_freq, $Z_I_amp, $Z_Q_amp, $Z_I_bw, $Z_Q_bw, $Z_proc_time, $samp_rate)
+	self.$(id).set_H_gete_parameters($H_freq, $H_I_amp, $H_Q_amp, $H_I_bw, $H_Q_bw, $H_proc_time, $samp_rate)
+	self.$(id).set_T_gete_parameters($T_freq, $T_I_amp, $T_Q_amp, $T_I_bw, $T_Q_bw, $T_proc_time, $samp_rate)
+	self.$(id).set_S_gete_parameters($S_freq, $S_I_amp, $S_Q_amp, $S_I_bw, $S_Q_bw, $S_proc_time, $samp_rate)
+	self.$(id).set_INIT_parameters($INIT_freq, $INIT_I_amp, $INIT_Q_amp, $INIT_I_bw, $INIT_Q_bw, $INIT_proc_time, $samp_rate)
+	self.$(id).set_RO_parameters($RO_freq, $RO_I_amp, $RO_Q_amp, $RO_I_bw, $RO_Q_bw, $RO_proc_time, $samp_rate)
 	</make>
 
 	<callback>set_time_scale_rate($scale_rate)</callback>
-	<callback>self.$(id).set_X_gete_parameters($X_I_freq, $X_Q_freq, $X_I_amp, $X_Q_amp, $X_I_bw, $X_Q_bw, $X_proc_time, $samp_rate)</callback>
-	<callback>self.$(id).set_Y_gete_parameters($Y_I_freq, $Y_Q_freq, $Y_I_amp, $Y_Q_amp, $Y_I_bw, $Y_Q_bw, $Y_proc_time, $samp_rate)</callback>
-	<callback>self.$(id).set_Z_gete_parameters($Z_I_freq, $Z_Q_freq, $Z_I_amp, $Z_Q_amp, $Z_I_bw, $Z_Q_bw, $Z_proc_time, $samp_rate)</callback>
-	<callback>self.$(id).set_H_gete_parameters($H_I_freq, $H_Q_freq, $H_I_amp, $H_Q_amp, $H_I_bw, $H_Q_bw, $H_proc_time, $samp_rate)</callback>
-	<callback>self.$(id).set_T_gete_parameters($T_I_freq, $T_Q_freq, $T_I_amp, $T_Q_amp, $T_I_bw, $T_Q_bw, $T_proc_time, $samp_rate)</callback>
-	<callback>self.$(id).set_S_gete_parameters($S_I_freq, $S_Q_freq, $S_I_amp, $S_Q_amp, $S_I_bw, $S_Q_bw, $S_proc_time, $samp_rate)</callback>
-	<callback>self.$(id).set_INIT_parameters($INIT_I_freq, $INIT_Q_freq, $INIT_I_amp, $INIT_Q_amp, $INIT_I_bw, $INIT_Q_bw, $INIT_proc_time, $samp_rate)</callback>
-	<callback>self.$(id).set_RO_parameters($RO_I_freq, $RO_Q_freq, $RO_I_amp, $RO_Q_amp, $RO_I_bw, $RO_Q_bw, $RO_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_X_gete_parameters($X_freq, $X_I_amp, $X_Q_amp, $X_I_bw, $X_Q_bw, $X_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_Y_gete_parameters($Y_freq, $Y_I_amp, $Y_Q_amp, $Y_I_bw, $Y_Q_bw, $Y_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_Z_gete_parameters($Z_freq, $Z_I_amp, $Z_Q_amp, $Z_I_bw, $Z_Q_bw, $Z_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_H_gete_parameters($H_freq, $H_I_amp, $H_Q_amp, $H_I_bw, $H_Q_bw, $H_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_T_gete_parameters($T_freq, $T_I_amp, $T_Q_amp, $T_I_bw, $T_Q_bw, $T_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_S_gete_parameters($S_freq, $S_I_amp, $S_Q_amp, $S_I_bw, $S_Q_bw, $S_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_INIT_parameters($INIT_freq, $INIT_I_amp, $INIT_Q_amp, $INIT_I_bw, $INIT_Q_bw, $INIT_proc_time, $samp_rate)</callback>
+	<callback>self.$(id).set_RO_parameters($RO_freq, $RO_I_amp, $RO_Q_amp, $RO_I_bw, $RO_Q_bw, $RO_proc_time, $samp_rate)</callback>
 
 	<param_tab_order>
 		<tab>General</tab>
@@ -44,6 +44,7 @@
 		<key>qubit_id</key>
 		<value>0</value>
 		<type>real</type>
+		<hide>#if $qubit_id() then 'none' else 'part'#</hide>
 	</param>
 	<param>
 		<name>Sample Rate</name>
@@ -75,465 +76,401 @@
 
 
 	<param>
-		<name>I Frequency</name>
-		<key>INIT_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>INIT_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
-		<tab>Initializer</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>INIT_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $INIT_freq() then 'none' else 'part'#</hide>
 		<tab>Initializer</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>INIT_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $INIT_I_amp() then 'none' else 'part'#</hide>
 		<tab>Initializer</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>INIT_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $INIT_Q_amp() then 'none' else 'part'#</hide>
 		<tab>Initializer</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>INIT_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $INIT_I_bw() then 'none' else 'part'#</hide>
 		<tab>Initializer</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>INIT_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $INIT_Q_bw() then 'none' else 'part'#</hide>
 		<tab>Initializer</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>INIT_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $INIT_proc_time() then 'none' else 'part'#</hide>
 		<tab>Initializer</tab>
 	</param>
 
 
 	<param>
-		<name>I Frequency</name>
-		<key>RO_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>RO_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<tab>readout</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>RO_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $RO_freq() then 'none' else 'part'#</hide>
 		<tab>readout</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>RO_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $RO_I_amp() then 'none' else 'part'#</hide>
 		<tab>readout</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>RO_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $RO_Q_amp() then 'none' else 'part'#</hide>
 		<tab>readout</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>RO_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $RO_I_bw() then 'none' else 'part'#</hide>
 		<tab>readout</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>RO_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $RO_Q_bw() then 'none' else 'part'#</hide>
 		<tab>readout</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>RO_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $RO_proc_time() then 'none' else 'part'#</hide>
 		<tab>readout</tab>
 	</param>
 
 
 	<param>
-		<name>I Frequency</name>
-		<key>X_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>X_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
-		<tab>X gate</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>X_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $X_freq() then 'none' else 'part'#</hide>
 		<tab>X gate</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>X_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $X_I_amp() then 'none' else 'part'#</hide>
 		<tab>X gate</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>X_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $X_Q_amp() then 'none' else 'part'#</hide>
 		<tab>X gate</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>X_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $X_I_bw() then 'none' else 'part'#</hide>
 		<tab>X gate</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>X_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $X_Q_bw() then 'none' else 'part'#</hide>
 		<tab>X gate</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>X_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $X_proc_time() then 'none' else 'part'#</hide>
 		<tab>X gate</tab>
 	</param>
 
 
-
 	<param>
-		<name>I Frequency</name>
-		<key>Y_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>Y_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
-		<tab>Y gate</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>Y_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Y_freq() then 'none' else 'part'#</hide>
 		<tab>Y gate</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>Y_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $Y_I_amp() then 'none' else 'part'#</hide>
 		<tab>Y gate</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>Y_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $Y_Q_amp() then 'none' else 'part'#</hide>
 		<tab>Y gate</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>Y_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Y_I_bw() then 'none' else 'part'#</hide>
 		<tab>Y gate</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>Y_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Y_Q_bw() then 'none' else 'part'#</hide>
 		<tab>Y gate</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>Y_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Y_proc_time() then 'none' else 'part'#</hide>
 		<tab>Y gate</tab>
 	</param>
 
 
 	<param>
-		<name>I Frequency</name>
-		<key>Z_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>Z_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
-		<tab>Z gate</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>Z_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Z_freq() then 'none' else 'part'#</hide>
 		<tab>Z gate</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>Z_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $Z_I_amp() then 'none' else 'part'#</hide>
 		<tab>Z gate</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>Z_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $Z_Q_amp() then 'none' else 'part'#</hide>
 		<tab>Z gate</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>Z_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Z_I_bw() then 'none' else 'part'#</hide>
 		<tab>Z gate</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>Z_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Z_Q_bw() then 'none' else 'part'#</hide>
 		<tab>Z gate</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>Z_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $Z_proc_time() then 'none' else 'part'#</hide>
 		<tab>Z gate</tab>
 	</param>
 
 
 	<param>
-		<name>I Frequency</name>
-		<key>H_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>H_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
-		<tab>H gate</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>H_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $H_freq() then 'none' else 'part'#</hide>
 		<tab>H gate</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>H_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $H_I_amp() then 'none' else 'part'#</hide>
 		<tab>H gate</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>H_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $H_Q_amp() then 'none' else 'part'#</hide>
 		<tab>H gate</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>H_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $H_I_bw() then 'none' else 'part'#</hide>
 		<tab>H gate</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>H_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $H_Q_bw() then 'none' else 'part'#</hide>
 		<tab>H gate</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>H_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $H_proc_time() then 'none' else 'part'#</hide>
 		<tab>H gate</tab>
 	</param>
 
 
 	<param>
-		<name>I Frequency</name>
-		<key>T_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>T_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
-		<tab>T gate</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>T_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $T_freq() then 'none' else 'part'#</hide>
 		<tab>T gate</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>T_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $T_I_amp() then 'none' else 'part'#</hide>
 		<tab>T gate</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>T_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $T_Q_amp() then 'none' else 'part'#</hide>
 		<tab>T gate</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>T_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $T_I_bw() then 'none' else 'part'#</hide>
 		<tab>T gate</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>T_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $T_Q_bw() then 'none' else 'part'#</hide>
 		<tab>T gate</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>T_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $T_proc_time() then 'none' else 'part'#</hide>
 		<tab>T gate</tab>
 	</param>
 
 
 	<param>
-		<name>I Frequency</name>
-		<key>S_I_freq</key>
-		<value>1000</value>
+		<name>Frequency</name>
+		<key>S_freq</key>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
-		<tab>S gate</tab>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>S_Q_freq</key>
-		<value>1000</value>
-		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $S_freq() then 'none' else 'part'#</hide>
 		<tab>S gate</tab>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>S_I_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $S_I_amp() then 'none' else 'part'#</hide>
 		<tab>S gate</tab>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>S_Q_amp</key>
-		<value>1.0</value>
+		<value>0</value>
 		<type>float</type>
-		<hide>all</hide>
+		<hide>#if $S_Q_amp() then 'none' else 'part'#</hide>
 		<tab>S gate</tab>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>S_I_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $S_I_bw() then 'none' else 'part'#</hide>
 		<tab>S gate</tab>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>S_Q_bw</key>
-		<value>1</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $S_Q_bw() then 'none' else 'part'#</hide>
 		<tab>S gate</tab>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
 		<key>S_proc_time</key>
-		<value>10000</value>
+		<value>0</value>
 		<type>real</type>
-		<hide>all</hide>
+		<hide>#if $S_proc_time() then 'none' else 'part'#</hide>
 		<tab>S gate</tab>
 	</param>
 
@@ -548,7 +485,16 @@
 		<optional>1</optional>
 		<hide>$showSyncPort</hide>
 	</sink>
+	<sink>
+		<name>feedback</name>
+		<type>message</type>
+		<optional>1</optional>
+	</sink>
 
+	<source>
+		<name>gate_wave</name>
+		<type>complex</type>
+	</source>
 	<source>
 		<name>control_wave</name>
 		<type>complex</type>

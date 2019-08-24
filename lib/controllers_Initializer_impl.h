@@ -48,8 +48,7 @@ namespace gr {
     public:
       controllers_Initializer_impl(
                    double qubit_id,
-                   double I_requency,
-                   double Q_requency,
+                   double frequency,
                    double I_amplitude,
                    double Q_amplitude,
                    double I_bandwidth,

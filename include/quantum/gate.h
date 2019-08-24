@@ -47,7 +47,7 @@ namespace gr {
     class gate
     {
     private:
-      double d_I_freq, d_Q_freq;
+      double d_freq;
       double d_I_amp, d_Q_amp;
       double d_I_bw, d_Q_bw;
       double d_proc_time_ns;
@@ -56,8 +56,7 @@ namespace gr {
       double d_samps_per_tick, d_samps_per_us;
 
     public:
-      gate(double I_requency,
-           double Q_requency,
+      gate(double frequency,
            double I_amplitude,
            double Q_amplitude,
            double I_bandwidth,
@@ -66,11 +65,8 @@ namespace gr {
            double samples_per_sec);
       ~gate();
 
-      void set_I_frequency(double freq);
-      double I_frequency();
-
-      void set_Q_frequency(double freq);
-      double Q_frequency();
+      void set_frequency(double freq);
+      double frequency();
 
       void set_I_amplitude(double amp);
       double I_amplitude();

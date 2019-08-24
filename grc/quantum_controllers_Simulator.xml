@@ -11,8 +11,9 @@
 
 
 	<param>
-		<name>Qubit ID</name>
-		<key>qubit_id</key>
+		<name>Qubit Number</name>
+		<key>qubit_num</key>
+		<value>1</value>
 		<type>real</type>
 	</param>
 	<param>
@@ -51,13 +52,21 @@
 
 
 	<sink>
+		<name>gate_wave</name>
+		<type>complex</type>
+		<nports>$qubit_num</nports>
+	</sink>
+
+	<sink>
 		<name>control_wave</name>
 		<type>complex</type>
+		<nports>$qubit_num</nports>
 	</sink>
 
 	<sink>
 		<name>reqdout_wave</name>
 		<type>complex</type>
+		<nports>$qubit_num</nports>
 	</sink>
 	<sink>
 		<name>sync_in</name>
@@ -69,6 +78,7 @@
 	<source>
 		<name>measurement</name>
 		<type>complex</type>
+		<nports>$qubit_num</nports>
 	</source>
 	<source>
 		<name>sync_out</name>

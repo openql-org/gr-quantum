@@ -35,8 +35,7 @@ namespace gr {
 
     controllers_readout::sptr
     controllers_readout::make(
-                  double I_requency,
-                  double Q_requency,
+                  double frequency,
                   double I_amplitude,
                   double Q_amplitude,
                   double I_bandwidth,
@@ -48,8 +47,7 @@ namespace gr {
     {
       return gnuradio::get_initial_sptr
         (new controllers_readout_impl(
-                          I_requency,
-                          Q_requency,
+                          frequency,
                           I_amplitude,
                           Q_amplitude,
                           I_bandwidth,
@@ -60,8 +58,7 @@ namespace gr {
     }
 
     controllers_readout_impl::controllers_readout_impl(
-                                 double I_requency,
-                                 double Q_requency,
+                                 double frequency,
                                  double I_amplitude,
                                  double Q_amplitude,
                                  double I_bandwidth,
@@ -83,7 +80,7 @@ namespace gr {
       set_processing_time_ns(processing_time);
       set_sample_rate(samples_per_second);
 */
-      RO = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
+      RO = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
       set_WAVE_port(show_WAVE_port);
 
 

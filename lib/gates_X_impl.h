@@ -45,8 +45,7 @@ namespace gr {
       gate *d_gate;
 
     public:
-      gates_X_impl(double I_requency,
-                   double Q_requency,
+      gates_X_impl(double frequency,
                    double I_amplitude,
                    double Q_amplitude,
                    double I_bandwidth,

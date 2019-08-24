@@ -4,9 +4,8 @@
 	<key>quantum_gates_CNOT</key>
 	<category>[Quantum]/gates</category>
 	<import>import quantum</import>
-	<make>quantum.gates_CNOT($I_freq, $Q_freq, $I_amp, $Q_amp, $I_bw, $Q_bw, $proc_time, $samp_rate, $showWAVEports)</make>
-	<callback>set_I_frequency($I_freq)</callback>
-	<callback>set_Q_frequency($Q_freq)</callback>
+	<make>quantum.gates_CNOT($CTRL_mode, $freq, $I_amp, $Q_amp, $I_bw, $Q_bw, $proc_time, $samp_rate, $showWAVEports)</make>
+	<callback>set_frequency($freq)</callback>
 	<callback>set_I_amplitude($I_amp)</callback>
 	<callback>set_Q_amplitude($Q_amp)</callback>
 	<callback>set_I_Bandwidth($I_bw)</callback>
@@ -14,40 +13,55 @@
 	<callback>set_processing_time_ns($proc_time)</callback>
 
 	<param>
-		<name>I Frequency</name>
-		<key>I_freq</key>
-		<value>1000</value>
-		<type>real</type>
+		<name>DC mode</name>
+		<key>CTRL_mode</key>
+		<value>False</value>
+		<type>enum</type>
+		<hide>part</hide>
+		<option>
+			<name>Yes</name>
+			<key>True</key>
+		</option>
+		<option>
+			<name>No</name>
+			<key>False</key>
+		</option>
 	</param>
+
 	<param>
-		<name>Q Frequency</name>
-		<key>Q_freq</key>
+		<name>Frequency</name>
+		<key>freq</key>
 		<value>1000</value>
 		<type>real</type>
+		<hide>#if $CTRL_mode() == 'False' then 'none' else 'all'#</hide>
 	</param>
 	<param>
 		<name>I Amplitude</name>
 		<key>I_amp</key>
 		<value>1.0</value>
 		<type>float</type>
+		<hide>#if $CTRL_mode() == 'False' then 'none' else 'all'#</hide>
 	</param>
 	<param>
 		<name>Q Amplitude</name>
 		<key>Q_amp</key>
 		<value>1.0</value>
 		<type>float</type>
+		<hide>#if $CTRL_mode() == 'False' then 'none' else 'all'#</hide>
 	</param>
 	<param>
 		<name>I Bandwidth</name>
 		<key>I_bw</key>
 		<value>1</value>
 		<type>real</type>
+		<hide>#if $CTRL_mode() == 'False' then 'none' else 'all'#</hide>
 	</param>
 	<param>
 		<name>Q Bandwidth</name>
 		<key>Q_bw</key>
 		<value>1</value>
 		<type>real</type>
+		<hide>#if $CTRL_mode() == 'False' then 'none' else 'all'#</hide>
 	</param>
 	<param>
 		<name>Processing Time(ns)</name>
@@ -60,7 +74,9 @@
 		<key>samples_per_second</key>
 		<value>samp_rate</value>
 		<type>real</type>
+		<hide>#if $CTRL_mode() == 'False' then 'none' else 'all'#</hide>
 	</param>
+
 	<param>
 		<name>Num CTRL Outputs</name>
 		<key>num_CTRL_outputs</key>
@@ -72,7 +88,7 @@
 		<key>showWAVEports</key>
 		<value>True</value>
 		<type>enum</type>
-		<hide>part</hide>
+		<hide>#if $CTRL_mode() == 'False' then 'part' else 'all'#</hide>
 		<option>
 			<name>Yes</name>
 			<key>False</key>

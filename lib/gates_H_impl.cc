@@ -34,8 +34,7 @@ namespace gr {
   namespace quantum {
 
     gates_H::sptr
-    gates_H::make(double I_requency,
-                  double Q_requency,
+    gates_H::make(double frequency,
                   double I_amplitude,
                   double Q_amplitude,
                   double I_bandwidth,
@@ -46,8 +45,7 @@ namespace gr {
 
     {
       return gnuradio::get_initial_sptr
-        (new gates_H_impl(I_requency,
-                          Q_requency,
+        (new gates_H_impl(frequency,
                           I_amplitude,
                           Q_amplitude,
                           I_bandwidth,
@@ -57,8 +55,7 @@ namespace gr {
                           show_WAVE_port));
     }
 
-    gates_H_impl::gates_H_impl(  double I_requency,
-                                 double Q_requency,
+    gates_H_impl::gates_H_impl(  double frequency,
                                  double I_amplitude,
                                  double Q_amplitude,
                                  double I_bandwidth,
@@ -80,7 +77,7 @@ namespace gr {
       set_processing_time_ns(processing_time);
       set_sample_rate(samples_per_second);
 */
-      H_gate = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
+      d_gate = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
       set_WAVE_port(show_WAVE_port);
 
 

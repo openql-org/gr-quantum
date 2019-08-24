@@ -186,8 +186,40 @@
       <value>True</value>
     </param>
     <param>
+      <key>H_freq</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>INIT_freq</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>RO_freq</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>S_freq</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>T_freq</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>X_freq</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>Y_freq</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>Z_freq</key>
+      <value>0</value>
+    </param>
+    <param>
       <key>_coordinate</key>
-      <value>(288, 364)</value>
+      <value>(376, 376)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -195,99 +227,67 @@
     </param>
     <param>
       <key>H_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>INIT_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>RO_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>S_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>T_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>X_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>Y_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>Z_I_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>H_I_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>INIT_I_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>RO_I_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>S_I_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>T_I_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>X_I_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>Y_I_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>Z_I_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>H_I_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>INIT_I_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>RO_I_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>S_I_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>T_I_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>X_I_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>Y_I_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>Z_I_freq</key>
-      <value>1000</value>
+      <value>0</value>
     </param>
     <param>
       <key>id</key>
@@ -303,135 +303,103 @@
     </param>
     <param>
       <key>H_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>INIT_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>RO_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>S_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>T_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>X_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>Y_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>Z_proc_time</key>
-      <value>10000</value>
+      <value>0</value>
     </param>
     <param>
       <key>H_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>INIT_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>RO_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>S_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>T_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>X_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>Y_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>Z_Q_amp</key>
-      <value>1.0</value>
+      <value>0</value>
     </param>
     <param>
       <key>H_Q_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>INIT_Q_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>RO_Q_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>S_Q_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>T_Q_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>X_Q_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>Y_Q_bw</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>Z_Q_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>H_Q_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>INIT_Q_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>RO_Q_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>S_Q_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>T_Q_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>X_Q_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>Y_Q_freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>Z_Q_freq</key>
-      <value>1000</value>
+      <value>0</value>
     </param>
     <param>
       <key>qubit_id</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>samples_per_second</key>
@@ -470,7 +438,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(744, 364)</value>
+      <value>(744, 376)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -489,7 +457,7 @@
       <value>0</value>
     </param>
     <param>
-      <key>qubit_id</key>
+      <key>qubit_num</key>
       <value>1</value>
     </param>
     <param>
@@ -561,14 +529,20 @@
   <connection>
     <source_block_id>quantum_controllers_Coprocessor_0</source_block_id>
     <sink_block_id>quantum_controllers_Simulator_0</sink_block_id>
+    <source_key>1</source_key>
+    <sink_key>1</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>quantum_controllers_Coprocessor_0</source_block_id>
+    <sink_block_id>quantum_controllers_Simulator_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>quantum_controllers_Coprocessor_0</source_block_id>
     <sink_block_id>quantum_controllers_Simulator_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>1</sink_key>
+    <source_key>2</source_key>
+    <sink_key>2</sink_key>
   </connection>
   <connection>
     <source_block_id>quantum_controllers_Simulator_0</source_block_id>

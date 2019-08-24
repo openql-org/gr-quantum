@@ -4,9 +4,8 @@
 	<key>quantum_gates_T</key>
 	<category>[Quantum]/gates</category>
 	<import>import quantum</import>
-	<make>quantum.gates_T($I_freq, $Q_freq, $I_amp, $Q_amp, $I_bw, $Q_bw, $proc_time, $samp_rate, $showWAVEports)</make>
-	<callback>set_I_frequency($I_freq)</callback>
-	<callback>set_Q_frequency($Q_freq)</callback>
+	<make>quantum.gates_T($freq, $I_amp, $Q_amp, $I_bw, $Q_bw, $proc_time, $samp_rate, $showWAVEports)</make>
+	<callback>set_frequency($freq)</callback>
 	<callback>set_I_amplitude($I_amp)</callback>
 	<callback>set_Q_amplitude($Q_amp)</callback>
 	<callback>set_I_Bandwidth($I_bw)</callback>
@@ -14,14 +13,8 @@
 	<callback>set_processing_time_ns($proc_time)</callback>
 
 	<param>
-		<name>I Frequency</name>
-		<key>I_freq</key>
-		<value>1000</value>
-		<type>real</type>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>Q_freq</key>
+		<name>Frequency</name>
+		<key>freq</key>
 		<value>1000</value>
 		<type>real</type>
 	</param>

@@ -43,9 +43,9 @@ namespace gr {
     public:
       typedef boost::shared_ptr<controllers_Initializer> sptr;
 
-      static sptr make(double qubit_id,
-                       double I_requency,
-                       double Q_requency,
+      static sptr make(
+                       double qubit_id,
+                       double frequency,
                        double I_amplitude,
                        double Q_amplitude,
                        double I_bandwidth,
@@ -105,7 +105,6 @@ namespace gr {
       virtual double sample_rate() const = 0;
 
 */
-
       //! Sets Qubit ID number.
       virtual void set_qubit_id(double qubit_id) = 0;
 

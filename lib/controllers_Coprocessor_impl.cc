@@ -43,7 +43,7 @@ namespace gr {
     controllers_Coprocessor_impl::controllers_Coprocessor_impl(double qubit_id, double samples_per_sec, double time_scale_rate, bool show_SYNC_port)
       : sync_block("controllers_Coprocessor",
                       io_signature::make(0, 0, 0),
-                      io_signature::make(1, 1, sizeof(gr_complex)))
+                      io_signature::make(3, 3, sizeof(gr_complex)))
     {
       set_qubit_id(qubit_id);
       set_sample_rate(samples_per_sec);
@@ -51,12 +51,15 @@ namespace gr {
       set_SYNC_port(show_SYNC_port);
 
 
+
       message_port_register_in(pmt::mp("in"));
       set_msg_handler(pmt::mp("in"), boost::bind(&controllers_Coprocessor_impl::handle_cmd_msg, this, _1));
-
-      message_port_register_out(message_ports_out());
       message_port_register_in(pmt::mp("sync_in"));
       set_msg_handler(pmt::mp("sync_in"), boost::bind(&controllers_Coprocessor_impl::handle_SYNC_msg, this, _1));
+      message_port_register_in(pmt::mp("feedback"));
+      set_msg_handler(pmt::mp("feedback"), boost::bind(&controllers_Coprocessor_impl::handle_FEEDBACK_msg, this, _1));
+
+      message_port_register_out(message_ports_out());
 
     }
 
@@ -151,37 +154,52 @@ namespace gr {
     }
 
     void
-    controllers_Coprocessor_impl::set_INIT_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      INIT = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
-    }
-    void
-    controllers_Coprocessor_impl::set_RO_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      RO = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_Coprocessor_impl::handle_FEEDBACK_msg(pmt::pmt_t msg)
+    {
+      // add the field and publish
+      pmt::pmt_t meta = pmt::car(msg);
+      if(pmt::is_null(meta)){
+        meta = pmt::make_dict();
+        } else if(!pmt::is_dict(meta)){
+        throw std::runtime_error("Feedback received non cmd input");
+        }
+//TODO      meta = pmt::dict_add(meta, "k", "v");
+      this->_post(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
+//      message_port_pub(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
     }
 
     void
-    controllers_Coprocessor_impl::set_X_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      X_gate = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_Coprocessor_impl::set_INIT_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      INIT = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
     }
     void
-    controllers_Coprocessor_impl::set_Y_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      Y_gate = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_Coprocessor_impl::set_RO_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      RO = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    }
+
+    void
+    controllers_Coprocessor_impl::set_X_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      X_gate = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
     }
     void
-    controllers_Coprocessor_impl::set_Z_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      Z_gate = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_Coprocessor_impl::set_Y_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      Y_gate = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
     }
     void
-    controllers_Coprocessor_impl::set_H_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      H_gate = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_Coprocessor_impl::set_Z_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      Z_gate = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
     }
     void
-    controllers_Coprocessor_impl::set_T_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      T_gate = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_Coprocessor_impl::set_H_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      H_gate = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
     }
     void
-    controllers_Coprocessor_impl::set_S_gete_parameters(double I_requency, double Q_requency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      S_gate = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_Coprocessor_impl::set_T_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      T_gate = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    }
+    void
+    controllers_Coprocessor_impl::set_S_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
+      S_gate = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
     }
 
 

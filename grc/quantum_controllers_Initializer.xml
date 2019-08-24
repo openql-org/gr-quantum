@@ -4,9 +4,8 @@
 	<key>quantum_controllers_Initializer</key>
 	<category>[Quantum]/controllers</category>
 	<import>import quantum</import>
-	<make>quantum.controllers_Initializer($qubit_id, $I_freq, $Q_freq, $I_amp, $Q_amp, $I_bw, $Q_bw, $proc_time, $samp_rate, $showWAVEports)</make>
-	<callback>set_I_frequency($I_freq)</callback>
-	<callback>set_Q_frequency($Q_freq)</callback>
+	<make>quantum.controllers_Initializer($qubit_id, $freq, $I_amp, $Q_amp, $I_bw, $Q_bw, $proc_time, $samp_rate, $showWAVEports)</make>
+	<callback>set_frequency($freq)</callback>
 	<callback>set_I_amplitude($I_amp)</callback>
 	<callback>set_Q_amplitude($Q_amp)</callback>
 	<callback>set_I_Bandwidth($I_bw)</callback>
@@ -19,14 +18,8 @@
 		<type>real</type>
 	</param>
 	<param>
-		<name>I Frequency</name>
-		<key>I_freq</key>
-		<value>1000</value>
-		<type>real</type>
-	</param>
-	<param>
-		<name>Q Frequency</name>
-		<key>Q_freq</key>
+		<name>Frequency</name>
+		<key>freq</key>
 		<value>1000</value>
 		<type>real</type>
 	</param>
@@ -84,6 +77,11 @@
 
 	<sink>
 		<name>in</name>
+		<type>message</type>
+		<optional>1</optional>
+	</sink>
+	<sink>
+		<name>feedback</name>
 		<type>message</type>
 		<optional>1</optional>
 	</sink>

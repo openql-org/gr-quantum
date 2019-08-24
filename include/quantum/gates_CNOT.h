@@ -43,8 +43,8 @@ namespace gr {
     public:
       typedef boost::shared_ptr<gates_CNOT> sptr;
 
-      static sptr make(double I_requency,
-                       double Q_requency,
+      static sptr make(bool DC_mode,
+                       double frequency,
                        double I_amplitude,
                        double Q_amplitude,
                        double I_bandwidth,
@@ -104,6 +104,12 @@ namespace gr {
       virtual double sample_rate() const = 0;
 
 */
+
+      //! Sets using DC mode.
+      virtual void set_DC_mode(bool is_use) = 0;
+
+      //! Get using DC mode.
+      virtual bool DC_mode() const = 0;
 
       //! Sets using WAVE out.
       virtual void set_WAVE_port(bool is_use) = 0;

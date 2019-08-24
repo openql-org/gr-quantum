@@ -36,8 +36,7 @@ namespace gr {
     controllers_Initializer::sptr
     controllers_Initializer::make(
                   double qubit_id,
-                  double I_requency,
-                  double Q_requency,
+                  double frequency,
                   double I_amplitude,
                   double Q_amplitude,
                   double I_bandwidth,
@@ -50,8 +49,7 @@ namespace gr {
       return gnuradio::get_initial_sptr
         (new controllers_Initializer_impl(
                           qubit_id,
-                          I_requency,
-                          Q_requency,
+                          frequency,
                           I_amplitude,
                           Q_amplitude,
                           I_bandwidth,
@@ -63,8 +61,7 @@ namespace gr {
 
     controllers_Initializer_impl::controllers_Initializer_impl(
                                  double qubit_id,
-                                 double I_requency,
-                                 double Q_requency,
+                                 double frequency,
                                  double I_amplitude,
                                  double Q_amplitude,
                                  double I_bandwidth,
@@ -87,7 +84,7 @@ namespace gr {
       set_processing_time_ns(processing_time);
       set_sample_rate(samples_per_second);
 */
-      INIT = new gate(I_requency, Q_requency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
+      INIT = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
       set_WAVE_port(show_WAVE_port);
 
 
