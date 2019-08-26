@@ -51,16 +51,24 @@ To compile and install the hierarchical flowgraphs, the script
 ## Usage
 ### ゲート系
 #### 1量子ビットのゲート
-- X ビット反転演算
-- Y 位相反転演算
-- Z 位相・ビット反転演算
-- H アダマール演算
-- S Pai/2位相シフト演算
-- T Pai/4位相シフト演算
+- X
+ - ビット反転演算
+- Y
+ - 位相反転演算
+- Z
+ - 位相・ビット反転演算
+- H
+ - アダマール演算
+- S
+ - Pai/2位相シフト演算
+- T
+ - Pai/4位相シフト演算
 
 #### 2量子ビットのゲート
-- CNOT 制御NOTゲート
+- CNOT
+ - 制御NOTゲート
 - CTRL junction point
+ - 制御ゲートが影響を与える先
 
 #### 特殊なゲート
 - readout演算子
@@ -69,13 +77,13 @@ To compile and install the hierarchical flowgraphs, the script
  - 量子ビットの状態を初期化する。
 - wait演算子
  - ナノ秒数waitする
-
+ - これで各ゲートを同期させる
 
 ### 観測系（measurement）
-- 標準規定測定
- - 観測後の確率表示（Constellation Measurement）
-- ブロッホ測定
- - 量子ビットの断層撮影表示（Bloch Measurement）
+- 標準規定測定（Constellation Measurement）
+ - 観測後の確率表示
+- ブロッホ測定（Bloch Measurement）
+ - 量子ビットの断層撮影表示
 - 量子シミュレータ・観測器（Qubit Detector）
  - コンパイラのほうに処理結果を返すもの
  - 値を表示するもの
@@ -84,11 +92,11 @@ To compile and install the hierarchical flowgraphs, the script
 ### 操作系(controller)
 - 量子ファームウェア実行エンジンソース（Quantum Coprocessor）
  - スクリプトを実行して、波形を出力する
-- initializerブロック
+- Initializer
  -定数などのセットアップをするブロック
- -量子番号を渡す。CNOTがどこから来たか？がわからなくなるため。そのため、IDは変更不可能とする。
  -シミュレートモード（時間倍率などを変更）
 - 量子シミュレータ・実行器（Qubit Simulator）
  - 内部的には接続されていて、状態を両方で保持する。入出力を多数にする方法で多量子ビットを表す。
-- 同期
+- 同期（Sync Qubit）
  - 2量子ビット以上利用するときに同期を行う
+ - FPGA拡張するときに利用する
