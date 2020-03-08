@@ -112,59 +112,59 @@ Required dependencies:
 
 ### Gates(Quantum Logic Gates)
 - X
- - Bit Inversion Operation
+  - Bit Inversion Operation
 - Y
- - Phase Inversion Operation
+  - Phase Inversion Operation
 - Z
- - Phase & Bit Inversion Operation
+  - Phase & Bit Inversion Operation
 - H
- - Hadamard Operation
+  - Hadamard Operation
 - S
- - Pai/2 Phase Shift Operation
+  - Pai/2 Phase Shift Operation
 - T
- - Pai/4 Phase Shift Operation
+  - Pai/4 Phase Shift Operation
 - CNOT
- - Controlled NOT Gates
+  - Controlled NOT Gates
 - CTRL junction point
- - Controlled Gates Effect Point
+  - Controlled Gates Effect Point
 
 ### Controllers
 - ReadOut
- - ReadOut Operation
+  - ReadOut Operation
 - Initializer
- - Initialize the Qubit Operation
+  - Initialize the Qubit Operation
 - Quantum Coprocessor
- - Interpret Quantum Logic Gates Blocks's Flow and Send Gate's Wave, CTRL's Wave and RO Wave
+  - Interpret Quantum Logic Gates Blocks's Flow and Send Gate's Wave, CTRL's Wave and RO Wave
 - Qubit Analyzer
- - Analyze Gate's Wave to Gate Type
+  - Analyze Gate's Wave to Gate Type
 - Qubit RO Generator
- - Generate & Send ReadOut Wave
+  - Generate & Send ReadOut Wave
 - Qubit XXX Simulator
- - Qubit Circuit Simulator using XXX Library
+  - Qubit Circuit Simulator using XXX Library
 - Sync Wait
- - Wait(ns) in Quantum Coprocessor
+  - Wait(ns) in Quantum Coprocessor
 - Sync Clock
- - Synchronize each Gates
+  - Synchronize each Gates
 - Gates Prameters
- - All Quantum Logic Gates's Parameters List for API
+  - All Quantum Logic Gates's Parameters List for API
 
 ### Measurements
 - Qubit Detector
- - Detecte RO Wave as the Qubit's Vector(Angle)
+  - Detecte RO Wave as the Qubit's Vector(Angle)
 - QuTiP Wave2Qobj
- - Convert the RO Wave to QuTiP's Qobj
+  - Convert the RO Wave to QuTiP's Qobj
 
 ### Viewer
 - Constellation
- - Show the Matrix Histogram of Multi Qubits
+  - Show the Matrix Histogram of Multi Qubits
 - Bloch
- - Show the Bloch Sphere of 1 Qubit
+  - Show the Bloch Sphere of 1 Qubit
 
 ### API
 - OpenQL Source
- - Receive the Operation of each Qubits from OpenQL Quantum Simulator
+  - Receive the Operation of each Qubits from OpenQL Quantum Simulator
 - OpenQL Sink
- - Send the Result of each Qubits' Operation to OpenQL Quantum Simulator
+  - Send the Result of each Qubits' Operation to OpenQL Quantum Simulator
 
 
 ## How to Use Quantum Blocks
