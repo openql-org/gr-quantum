@@ -19,16 +19,27 @@
 # The presence of this file turns this directory into a Python package
 
 '''
-This is the GNU Radio QUANTUM module. Place your Python package
+This is the GNU Radio HOWTO module. Place your Python package
 description here (python/__init__.py).
 '''
+from __future__ import absolute_import
+from __future__ import unicode_literals
+import os
 
-# import swig generated symbols into the quantum namespace
+# import swig generated symbols into the howto namespace
 try:
-	# this might fail if the module is python-only
-	from quantum_swig import *
+    # this might fail if the module is python-only
+    from .quantum_swig import *
 except ImportError:
-	pass
+    dirname, filename = os.path.split(os.path.abspath(__file__))
+    __path__.append(os.path.join(dirname, "..", "..", "swig"))
+    from .quantum_swig import *
 
 # import any pure python here
-#
+from .quantum_controllers_QuTiP_Simulator import *
+from .quantum_measurements_QuTiP_Wave2Qob import *
+from .quantum_viewer_QuTiP_Bloch import *
+from .quantum_qubit_RO_state_type import *
+from .quantum_qubit_param_type import *
+from .quantum_gate_type import *
+from .quantum_gate_param_type import *

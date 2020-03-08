@@ -23,8 +23,9 @@
 #ifndef INCLUDED_GR_QUANTUM_CONTROLLERS_SYNC_IMPL_H
 #define INCLUDED_GR_QUANTUM_CONTROLLERS_SYNC_IMPL_H
 
-#include <quantum/gate.h>
 #include <quantum/controllers_sync.h>
+#include <boost/timer/timer.hpp>
+#include <gnuradio/logger.h>
 
 namespace gr {
   namespace quantum {
@@ -32,7 +33,14 @@ namespace gr {
     class controllers_sync_impl : public controllers_sync
     {
     private:
-      double d_sync_time_ns;
+      const pmt::pmt_t d_SYNC_out;
+
+      const long WAIT_TIME_NS = 1000000;
+      long d_send_time;
+      boost::timer::cpu_timer d_proc_timer;
+
+      gr::logger_ptr d_logger;
+      gr::logger_ptr d_debug_logger;
 
     public:
       controllers_sync_impl(
@@ -41,8 +49,6 @@ namespace gr {
 
       // Overloading gr::block::start to reset timer
       bool start();
-
-      void handle_cmd_msg(pmt::pmt_t msg);
 
       int work(int noutput_items,
                gr_vector_const_void_star &input_items,

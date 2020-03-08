@@ -45,41 +45,38 @@ namespace gr {
 
     controllers_wait_impl::controllers_wait_impl(
                                  double wait_time)
-      : sync_block("controllers_wait",
+      : block("controllers_wait",
                       io_signature::make(0, 0, 0),
-                      io_signature::make(0, 0, 0))
+                      io_signature::make(0, 0, 0)),
+      d_port_out(pmt::mp("out")),
+      d_port_in(pmt::mp("in"))
     {
+      configure_default_loggers(d_logger, d_debug_logger, "Wait");
       set_wait_time_ns(wait_time);
+      WAIT = new gate(gate::WAIT, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0, false, wait_time);
 
-      message_port_register_out(message_ports_out());
-      message_port_register_in(pmt::mp("in"));
-      set_msg_handler(pmt::mp("in"), boost::bind(&controllers_wait_impl::handle_cmd_msg, this, _1));
+      message_port_register_out(d_port_out);
+      message_port_register_in(d_port_in);
+      set_msg_handler(d_port_in, boost::bind(&controllers_wait_impl::handle_cmd_msg, this, _1));
     }
 
     controllers_wait_impl::~controllers_wait_impl()
     {
+      delete WAIT;
     }
 
     bool
     controllers_wait_impl::start()
     {
-      d_start = boost::get_system_time();
       return block::start();
     }
 
     void
     controllers_wait_impl::handle_cmd_msg(pmt::pmt_t msg)
     {
-      // add the field and publish
-      pmt::pmt_t meta = pmt::car(msg);
-      if(pmt::is_null(meta)){
-        meta = pmt::make_dict();
-        } else if(!pmt::is_dict(meta)){
-        throw std::runtime_error("cmd received non cmd input");
-        }
-//TODO      meta = pmt::dict_add(meta, "k", "v");
-      this->_post(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
-//      message_port_pub(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
+
+      msg = pmt::dict_add(msg, pmt::from_float(pmt::length(msg)+1), WAIT->get_parameters());
+      message_port_pub(d_port_out, msg);
     }
 
 
@@ -93,16 +90,6 @@ namespace gr {
     controllers_wait_impl::wait_time() const
     {
       return d_wait_time_ns;
-    }
-
-
-
-    int
-    controllers_wait_impl::work(int noutput_items,
-                        gr_vector_const_void_star &input_items,
-                        gr_vector_void_star &output_items)
-    {
-      return noutput_items;
     }
 
   } /* namespace quantum */

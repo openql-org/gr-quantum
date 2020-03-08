@@ -43,8 +43,7 @@ namespace gr {
     public:
       typedef boost::shared_ptr<measurements_Detector> sptr;
 
-      static sptr make(
-                       );
+      static sptr make(double qubit_num, double samples_per_sec, double time_scale_rate, double freq_threshold_rate, double amp_threshold_rate, double bw_threshold_rate, double proc_time_threshold_rate, bool qubit_pole);
 
     };
 

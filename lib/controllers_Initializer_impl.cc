@@ -43,7 +43,7 @@ namespace gr {
                   double Q_bandwidth,
                   double processing_time,
                   double samples_per_sec,
-                  bool show_WAVE_port)
+                  bool isFeedbackMode)
 
     {
       return gnuradio::get_initial_sptr
@@ -56,7 +56,7 @@ namespace gr {
                           Q_bandwidth,
                           processing_time,
                           samples_per_sec,
-                          show_WAVE_port));
+                          isFeedbackMode));
     }
 
     controllers_Initializer_impl::controllers_Initializer_impl(
@@ -68,33 +68,32 @@ namespace gr {
                                  double Q_bandwidth,
                                  double processing_time, 
                                  double samples_per_second,
-                                 bool show_WAVE_port)
-      : sync_block("controllers_Initializer",
+                                 bool isFeedbackMode)
+      : block("controllers_Initializer",
                       io_signature::make(0, 0, 0),
-                      io_signature::make(2, 2, sizeof(float)))
+                      io_signature::make(0, 0, 0)),
+      d_port_out(pmt::mp("out")),
+      d_port_in(pmt::mp("in")),
+      d_port_fb(pmt::mp("feedback"))
     {
+      configure_default_loggers(d_logger, d_debug_logger, "Initializer");
+
+      set_feedback_mode(isFeedbackMode);
       set_qubit_id(qubit_id);
-/*
-      set_I_frequency(I_requency);
-      set_Q_frequency(Q_requency);
-      set_I_amplitude(I_amplitude);
-      set_Q_amplitude(Q_amplitude);
-      set_I_bandwidth(I_bandwidth);
-      set_Q_bandwidth(Q_bandwidth);
-      set_processing_time_ns(processing_time);
-      set_sample_rate(samples_per_second);
-*/
-      INIT = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
-      set_WAVE_port(show_WAVE_port);
 
+      INIT = new gate(gate::INIT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second, qubit_id);
 
-      message_port_register_out(message_ports_out());
-      message_port_register_in(pmt::mp("in"));
-      set_msg_handler(pmt::mp("in"), boost::bind(&controllers_Initializer_impl::handle_cmd_msg, this, _1));
+      message_port_register_out(d_port_out);
+      message_port_register_in(d_port_in);
+      message_port_register_in(d_port_fb);
+      set_msg_handler(d_port_in, boost::bind(&controllers_Initializer_impl::handle_cmd_msg, this, _1));
+      set_msg_handler(d_port_fb, boost::bind(&controllers_Initializer_impl::handle_fb_msg, this, _1));
+
     }
 
     controllers_Initializer_impl::~controllers_Initializer_impl()
     {
+      delete INIT;
     }
 
     bool
@@ -102,23 +101,50 @@ namespace gr {
     {
       d_start = boost::get_system_time();
       d_total_samples = 0;
+
+      if(!is_feedback_mode()) {
+	    pmt::pmt_t stack = pmt::make_dict();
+	    stack = pmt::dict_add(stack, pmt::from_float(1), INIT->get_parameters());
+	    message_port_pub(d_port_out, stack);
+      }
+
       return block::start();
     }
 
     void
     controllers_Initializer_impl::handle_cmd_msg(pmt::pmt_t msg)
     {
-      // add the field and publish
-      pmt::pmt_t meta = pmt::car(msg);
-      if(pmt::is_null(meta)){
-        meta = pmt::make_dict();
-        } else if(!pmt::is_dict(meta)){
-        throw std::runtime_error("cmd received non cmd input");
-        }
-//TODO      meta = pmt::dict_add(meta, "k", "v");
-      this->_post(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
-//      message_port_pub(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
+      if(is_feedback_mode()) {
+        msg = pmt::dict_add(msg, pmt::from_float(pmt::length(msg)+1), INIT->get_parameters());
+        message_port_pub(d_port_out, msg);
+      }
     }
+
+
+    void
+    controllers_Initializer_impl::handle_fb_msg(pmt::pmt_t msg)
+    {
+    }
+
+    bool
+    controllers_Initializer_impl::check_topology(int ninputs, int noutputs)
+    {
+
+      return true;
+    }
+
+
+
+    void
+    controllers_Initializer_impl::set_feedback_mode(bool mode) {
+      d_feedback_mode = mode;
+    }
+
+    bool
+    controllers_Initializer_impl::is_feedback_mode() const{
+      return d_feedback_mode;
+    }
+
 
     void
     controllers_Initializer_impl::set_qubit_id(double qubit_id)
@@ -129,110 +155,6 @@ namespace gr {
     controllers_Initializer_impl::qubit_id() const
     {
       return d_qubit_id;
-    }
-
-/*
-    void
-    controllers_Initializer_impl::set_I_frequency(double freq) {
-      d_I_freq = freq;
-    }
-    double
-    controllers_Initializer_impl::I_frequency() {
-      return d_I_freq;
-    }
-
-    void
-    controllers_Initializer_impl::set_Q_frequency(double freq);
-      d_Q_freq = freq;
-    }
-    double
-    controllers_Initializer_impl::Q_frequency();
-      return d_Q_freq;
-    }
-
-    void
-    controllers_Initializer_impl::set_I_amplitude(double amp);
-      d_I_amp = amp;
-    }
-    double
-    controllers_Initializer_impl::I_amplitude();
-      return d_I_amp;
-    }
-
-    void
-    controllers_Initializer_impl::set_Q_amplitude(double amp);
-      d_Q_amp = amp;
-    }
-    double
-    controllers_Initializer_impl::Q_amplitude();
-      return d_Q_amp;
-    }
-
-    void
-    controllers_Initializer_impl::set_I_bandwidth(double bw);
-      d_I_bw = bw;
-    }
-    double
-    controllers_Initializer_impl::I_bandwidth();
-      return d_I_bw;
-    }
-
-    void
-    controllers_Initializer_impl::set_Q_bandwidth(double bw);
-      d_Q_bw = bw;
-    }
-    double
-    controllers_Initializer_impl::Q_bandwidth();
-      return d_Q_bw;
-    }
-
-
-    void
-    controllers_Initializer_impl::set_processing_time_ns(double proc_time_ns);
-      d_proc_time_ns = proc_time_ns;
-    }
-    double
-    controllers_Initializer_impl::processing_time();
-      return d_proc_time_ns;
-    }
-
-
-    void
-    controllers_Initializer_impl::set_sample_rate(double rate)
-    {
-      //changing the sample rate performs a reset of state params
-      d_start = boost::get_system_time();
-      d_total_samples = 0;
-      d_samps_per_tick = rate/boost::posix_time::time_duration::ticks_per_second();
-      d_samps_per_us = rate/1e6;
-    }
-
-    double
-    controllers_Initializer_impl::sample_rate() const
-    {
-      return d_samps_per_us * 1e6;
-    }
-
-*/
-
-    void
-    controllers_Initializer_impl::set_WAVE_port(bool is_use) {
-        d_WAVE_port = !is_use;
-    }
-
-    bool
-    controllers_Initializer_impl::WAVE_port() const{
-      return d_WAVE_port;
-    }
-
-
-
-    int
-    controllers_Initializer_impl::work(int noutput_items,
-                        gr_vector_const_void_star &input_items,
-                        gr_vector_void_star &output_items)
-    {
-      return noutput_items;
     }
 
   } /* namespace quantum */

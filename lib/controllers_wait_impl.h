@@ -23,8 +23,9 @@
 #ifndef INCLUDED_GR_QUANTUM_CONTROLLERS_WAIT_IMPL_H
 #define INCLUDED_GR_QUANTUM_CONTROLLERS_WAIT_IMPL_H
 
-#include <quantum/gate.h>
 #include <quantum/controllers_wait.h>
+#include "gate.h"
+#include <gnuradio/logger.h>
 
 namespace gr {
   namespace quantum {
@@ -32,8 +33,11 @@ namespace gr {
     class controllers_wait_impl : public controllers_wait
     {
     private:
-      boost::system_time d_start;
       double d_wait_time_ns;
+
+      gate *WAIT;
+      const pmt::pmt_t d_port_out;
+      const pmt::pmt_t d_port_in;
 
     public:
       controllers_wait_impl(
@@ -48,9 +52,6 @@ namespace gr {
 
       void handle_cmd_msg(pmt::pmt_t msg);
 
-      int work(int noutput_items,
-               gr_vector_const_void_star &input_items,
-               gr_vector_void_star &output_items);
     };
 
   } /* namespace quantum */

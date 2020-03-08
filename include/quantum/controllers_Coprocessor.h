@@ -24,7 +24,12 @@
 #define INCLUDED_GR_QUANTUM_CONTROLLERS_COPROSESSOR_H
 
 #include <quantum/api.h>
-#include <gnuradio/sync_block.h>
+//#include <gnuradio/sync_block.h>
+#include <gnuradio/hier_block2.h>
+#include <gnuradio/analog/sig_source_waveform.h>
+#include <gnuradio/analog/sig_source.h>
+#include <gnuradio/blocks/float_to_complex.h>
+#include <gnuradio/blocks/add_blk.h>
 
 namespace gr {
   namespace quantum {
@@ -38,46 +43,12 @@ namespace gr {
      * input: one messages; output: two streams of float
      *
      */
-    class QUANTUM_API controllers_Coprocessor : virtual public sync_block
+    class QUANTUM_API controllers_Coprocessor : virtual public hier_block2
     {
     public:
       typedef boost::shared_ptr<controllers_Coprocessor> sptr;
 
       static sptr make(double qubit_id, double samples_per_sec, double time_scale_rate, bool show_SYNC_port=true);
-
-      //! Sets Qubit ID number.
-      virtual void set_qubit_id(double qubit_id) = 0;
-
-      //! Gets Qubit ID number.
-      virtual double qubit_id() = 0;
-
-      //! Sets the sample rate in samples per second.
-      virtual void set_sample_rate(double rate) = 0;
-
-      //! Get the sample rate in samples per second.
-      virtual double sample_rate() = 0;
-
-      //! Sets Time scale rate.
-      virtual void set_time_scale_rate(double time_scale_rate) = 0;
-
-      //! Get Time scale rate.
-      virtual double time_scale_rate() = 0;
-
-      virtual void set_INIT_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
-
-      virtual void set_RO_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
-
-      virtual void set_X_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
-
-      virtual void set_Y_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
-
-      virtual void set_Z_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
-
-      virtual void set_H_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
-
-      virtual void set_T_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
-
-      virtual void set_S_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) = 0;
 
       //! Sets using SYNC in/out.
       virtual void set_SYNC_port(bool is_use) = 0;

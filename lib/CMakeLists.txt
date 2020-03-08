@@ -21,20 +21,13 @@
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
-
-include_directories(
-    ${Boost_INCLUDE_DIR}
-    ${QWT_INCLUDE_DIRS}
-    ${QT_INCLUDE_DIRS}
-)
-link_directories(
-    ${Boost_LIBRARY_DIRS}
-    ${QWT_LIBRARY_DIRS}
-    ${QT_LIBRARIES}
-)
+include_directories(${OSC_INCLUDE_DIRS} ${VOLK_INCLUDE_DIRS})
+link_directories(${OSC_LIBRARY_DIRS} ${VOLK_LIBRARIES})
 
 list(APPEND quantum_sources
+  controlled_sig_source.cc
   gate.cc
+  qubit.cc
   gates_X_impl.cc
   gates_Y_impl.cc
   gates_Z_impl.cc
@@ -44,15 +37,19 @@ list(APPEND quantum_sources
   gates_CNOT_impl.cc
   gates_junction_impl.cc
   controllers_Coprocessor_impl.cc
-  controllers_Simulator_impl.cc
+  controllers_Analyzer_impl.cc
+  controllers_Generator_impl.cc
   controllers_Initializer_impl.cc
   controllers_readout_impl.cc
   controllers_wait_impl.cc
   controllers_sync_impl.cc
-  measurements_Constellation_impl.cc
-  measurements_Bloch_impl.cc
+  controllers_gatesParams_impl.cc
+  controllers_callback_message_impl.cc
   measurements_Detector_impl.cc
+  API_OpenQL_Source_impl.cc
+  API_OpenQL_Sink_impl.cc
 )
+
 
 set(quantum_sources "${quantum_sources}" PARENT_SCOPE)
 if(NOT quantum_sources)
@@ -60,8 +57,35 @@ if(NOT quantum_sources)
 	return()
 endif(NOT quantum_sources)
 
+set(GR_REQUIRED_COMPONENTS RUNTIME BLOCKS PMT FILTER DIGITAL ANALOG FFT)
 add_library(gnuradio-quantum SHARED ${quantum_sources})
-target_link_libraries(gnuradio-quantum ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
+
+target_include_directories(
+    gnuradio-quantum
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+    PUBLIC $<INSTALL_INTERFACE:include>
+    ${GNURADIO_RUNTIME_INCLUDE_DIRS}
+    ${GNURADIO_ALL_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIR}
+    ${OSC_INCLUDE_DIRS}
+)
+target_link_libraries(
+    gnuradio-quantum
+    ${Boost_LIBRARIES}
+    ${OSC_LIBRARIES}
+    ${VOLK_LIBRARIES}
+    ${GNURADIO_RUNTIME_LIBRARIES}
+    ${GNURADIO_ALL_LIBRARIES}
+    gnuradio-runtime
+    gnuradio-blocks
+    gnuradio-filter
+    gnuradio-fft
+    gnuradio-analog
+    gnuradio-digital
+    gnuradio-pmt
+)
+
+
 set_target_properties(gnuradio-quantum PROPERTIES DEFINE_SYMBOL "gnuradio_quantum_EXPORTS")
 
 if(APPLE)
@@ -74,35 +98,39 @@ endif(APPLE)
 # Install built library files
 ########################################################################
 include(GrMiscUtils)
+#GR_LIBRARY_FOO(gnuradio-quantum)
 GR_LIBRARY_FOO(gnuradio-quantum RUNTIME_COMPONENT "quantum_runtime" DEVEL_COMPONENT "quantum_devel")
+
+########################################################################
+# Print summary
+########################################################################
+message(STATUS "Using install prefix: ${CMAKE_INSTALL_PREFIX}")
+message(STATUS "Building for version: ${VERSION} / ${LIBVER}")
+
 
 ########################################################################
 # Build and register unit test
 ########################################################################
 include(GrTest)
 
-include_directories(
-    ${CPPUNIT_INCLUDE_DIRS}
-    ${QWT_INCLUDE_DIRS}
-)
-
+# If your unit tests require special include paths, add them here
+#include_directories()
+# List all files that contain Boost.UTF unit tests here
 list(APPEND test_quantum_sources
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_quantum.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/qa_quantum.cc
 )
+# Anything we need to link to for the unit tests go here
+list(APPEND GR_TEST_TARGET_DEPS gnuradio-quantum)
 
-add_executable(test-quantum ${test_quantum_sources})
+if(NOT test_quantum_sources)
+    MESSAGE(STATUS "No C++ unit tests... skipping")
+    return()
+endif(NOT test_quantum_sources)
 
-target_link_libraries(
-  test-quantum
-  ${GNURADIO_RUNTIME_LIBRARIES}
-  ${Boost_LIBRARIES}
-  ${CPPUNIT_LIBRARIES}
-  ${QWT_LIBRARY_DIRS}
-  gnuradio-quantum
-)
-
-GR_ADD_TEST(test_quantum test-quantum)
+foreach(qa_file ${test_quantum_sources})
+    GR_ADD_CPP_TEST("quantum_${qa_file}"
+        ${CMAKE_CURRENT_SOURCE_DIR}/${qa_file}
+    )
+endforeach(qa_file)
 
 ########################################################################
 # Print summary

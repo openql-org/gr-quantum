@@ -16,8 +16,6 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-file(GLOB xml_files "*.xml")
-install(FILES ${xml_files} DESTINATION share/gnuradio/grc/blocks COMPONENT "quantum_python")
-
 file(GLOB yml_files "*.yml")
-install(FILES ${yml_files} DESTINATION ${GRC_BLOCKS_DIR} COMPONENT "quantum_python")
+install(FILES ${yml_files} DESTINATION share/gnuradio/grc/blocks)
+#install(FILES ${yml_files} DESTINATION share/gnuradio/grc/blocks COMPONENT "quantum_python")

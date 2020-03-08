@@ -47,12 +47,15 @@ namespace gr {
                                                  )
       : sync_block("controllers_sync",
                       io_signature::make(0, 0, 0),
-                      io_signature::make(0, 0, 0))
+                      io_signature::make(0, 0, 0)),
+      d_SYNC_out(pmt::mp("SYNC_CLK_out"))
     {
+      configure_default_loggers(d_logger, d_debug_logger, "Sync");
 
-      message_port_register_out(message_ports_out());
-      message_port_register_in(pmt::mp("in"));
-      set_msg_handler(pmt::mp("in"), boost::bind(&controllers_sync_impl::handle_cmd_msg, this, _1));
+      d_send_time = 0;
+      d_proc_timer.start();
+
+      message_port_register_out(d_SYNC_out);
     }
 
     controllers_sync_impl::~controllers_sync_impl()
@@ -65,27 +68,28 @@ namespace gr {
       return block::start();
     }
 
-    void
-    controllers_sync_impl::handle_cmd_msg(pmt::pmt_t msg)
-    {
-      // add the field and publish
-      pmt::pmt_t meta = pmt::car(msg);
-      if(pmt::is_null(meta)){
-        meta = pmt::make_dict();
-        } else if(!pmt::is_dict(meta)){
-        throw std::runtime_error("cmd received non cmd input");
-        }
-//TODO      meta = pmt::dict_add(meta, "k", "v");
-      this->_post(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
-//      message_port_pub(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
-    }
-
-
     int
     controllers_sync_impl::work(int noutput_items,
                         gr_vector_const_void_star &input_items,
                         gr_vector_void_star &output_items)
     {
+
+      double cur_time_ns;
+      long wait_time = WAIT_TIME_NS;
+#if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
+      auto cur_proc_time = boost::chrono::nanoseconds(d_proc_timer.elapsed().wall);
+      cur_time_ns = cur_proc_time.count();
+#else
+      auto cur_proc_time = boost::chrono::microseconds(d_proc_timer.elapsed().wall);
+      cur_time_ns = cur_proc_time.count() / 1000;
+      wait_time /= 1000;
+#endif
+      if(wait_time+d_send_time > cur_time_ns) {
+        return noutput_items;
+      }
+      d_send_time = cur_time_ns;
+
+      message_port_pub(d_SYNC_out, pmt::from_double(cur_time_ns));
       return noutput_items;
     }
 

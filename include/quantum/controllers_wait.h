@@ -24,7 +24,7 @@
 #define INCLUDED_GR_QUANTUM_CONTROLLERS_WAIT_H
 
 #include <quantum/api.h>
-#include <gnuradio/sync_block.h>
+#include <gnuradio/block.h>
 
 namespace gr {
   namespace quantum {
@@ -38,19 +38,13 @@ namespace gr {
      * input: one messages; output: one message
      *
      */
-    class QUANTUM_API controllers_wait : virtual public sync_block
+    class QUANTUM_API controllers_wait : virtual public block
     {
     public:
       typedef boost::shared_ptr<controllers_wait> sptr;
 
       static sptr make(
                        double wait_time);
-
-      //! Sets Wait time(ns).
-      virtual void set_wait_time_ns(double wait_time_ns) = 0;
-
-      //! Get Wait time(ns).
-      virtual double wait_time() const = 0;
 
     };
 

@@ -41,8 +41,7 @@ namespace gr {
                   double I_bandwidth,
                   double Q_bandwidth,
                   double processing_time,
-                  double samples_per_sec,
-                  bool show_WAVE_port)
+                  double samples_per_sec)
 
     {
       return gnuradio::get_initial_sptr
@@ -53,8 +52,7 @@ namespace gr {
                           I_bandwidth,
                           Q_bandwidth,
                           processing_time,
-                          samples_per_sec,
-                          show_WAVE_port));
+                          samples_per_sec));
     }
 
     gates_CNOT_impl::gates_CNOT_impl(bool DC_mode,
@@ -64,170 +62,48 @@ namespace gr {
                                  double I_bandwidth,
                                  double Q_bandwidth,
                                  double processing_time, 
-                                 double samples_per_second,
-                                 bool show_WAVE_port)
-      : sync_block("gates_CNOT",
+                                 double samples_per_second)
+      : block("gates_CNOT",
                       io_signature::make(0, 0, 0),
-                      io_signature::make(2, 2, sizeof(float)))
+                      io_signature::make(0, 0, 0)),
+      d_port_CTRL(pmt::mp("CTRL_port")),
+      d_port_out(pmt::mp("out")),
+      d_port_in(pmt::mp("in"))
     {
-/*
-      set_I_frequency(I_requency);
-      set_Q_frequency(Q_requency);
-      set_I_amplitude(I_amplitude);
-      set_Q_amplitude(Q_amplitude);
-      set_I_bandwidth(I_bandwidth);
-      set_Q_bandwidth(Q_bandwidth);
-      set_processing_time_ns(processing_time);
-      set_sample_rate(samples_per_second);
-*/
-      set_DC_mode(DC_mode);
-      CNOT = new gate(frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
-      set_WAVE_port(show_WAVE_port);
+      configure_default_loggers(d_logger, d_debug_logger, "CNOT Gate");
 
+      CNOT = new gate(gate::CNOT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_second);
+      CNOT->set_ctrl_dc_mode(DC_mode);
 
-      message_port_register_out(message_ports_out());
-      message_port_register_in(pmt::mp("in"));
-      set_msg_handler(pmt::mp("in"), boost::bind(&gates_CNOT_impl::handle_cmd_msg, this, _1));
+      message_port_register_out(d_port_CTRL);
+      message_port_register_out(d_port_out);
+      message_port_register_in(d_port_in);
+      set_msg_handler(d_port_in, boost::bind(&gates_CNOT_impl::handle_cmd_msg, this, _1));
     }
 
     gates_CNOT_impl::~gates_CNOT_impl()
     {
+       delete CNOT;
     }
 
     bool
     gates_CNOT_impl::start()
     {
-      d_start = boost::get_system_time();
-      d_total_samples = 0;
       return block::start();
     }
 
     void
     gates_CNOT_impl::handle_cmd_msg(pmt::pmt_t msg)
     {
-      // add the field and publish
-      pmt::pmt_t meta = pmt::car(msg);
-      if(pmt::is_null(meta)){
-        meta = pmt::make_dict();
-        } else if(!pmt::is_dict(meta)){
-        throw std::runtime_error("cmd received non cmd input");
-        }
-//TODO      meta = pmt::dict_add(meta, "k", "v");
-      this->_post(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
-//      message_port_pub(message_ports_out(), pmt::cons(meta, pmt::cdr(msg)));
-    }
 
-/*
-    void
-    gates_CNOT_impl::set_I_frequency(double freq) {
-      d_I_freq = freq;
-    }
-    double
-    gates_CNOT_impl::I_frequency() {
-      return d_I_freq;
-    }
+      pmt::pmt_t INIT_gates_params = pmt::dict_ref(msg, pmt::from_float(1), pmt::PMT_NIL);
+      int qubit_id = pmt::to_double(pmt::dict_ref(INIT_gates_params, pmt::from_float(gate::QUBIT_ID), pmt::PMT_NIL));
+      CNOT->set_qubit_ID(qubit_id);
 
-    void
-    gates_CNOT_impl::set_Q_frequency(double freq);
-      d_Q_freq = freq;
-    }
-    double
-    gates_CNOT_impl::Q_frequency();
-      return d_Q_freq;
-    }
-
-    void
-    gates_CNOT_impl::set_I_amplitude(double amp);
-      d_I_amp = amp;
-    }
-    double
-    gates_CNOT_impl::I_amplitude();
-      return d_I_amp;
-    }
-
-    void
-    gates_CNOT_impl::set_Q_amplitude(double amp);
-      d_Q_amp = amp;
-    }
-    double
-    gates_CNOT_impl::Q_amplitude();
-      return d_Q_amp;
-    }
-
-    void
-    gates_CNOT_impl::set_I_bandwidth(double bw);
-      d_I_bw = bw;
-    }
-    double
-    gates_CNOT_impl::I_bandwidth();
-      return d_I_bw;
-    }
-
-    void
-    gates_CNOT_impl::set_Q_bandwidth(double bw);
-      d_Q_bw = bw;
-    }
-    double
-    gates_CNOT_impl::Q_bandwidth();
-      return d_Q_bw;
-    }
-
-
-    void
-    gates_CNOT_impl::set_processing_time_ns(double proc_time_ns);
-      d_proc_time_ns = proc_time_ns;
-    }
-    double
-    gates_CNOT_impl::processing_time();
-      return d_proc_time_ns;
-    }
-
-
-    void
-    gates_CNOT_impl::set_sample_rate(double rate)
-    {
-      //changing the sample rate performs a reset of state params
-      d_start = boost::get_system_time();
-      d_total_samples = 0;
-      d_samps_per_tick = rate/boost::posix_time::time_duration::ticks_per_second();
-      d_samps_per_us = rate/1e6;
-    }
-
-    double
-    gates_CNOT_impl::sample_rate() const
-    {
-      return d_samps_per_us * 1e6;
-    }
-
-*/
-
-    void
-    gates_CNOT_impl::set_DC_mode(bool is_use) {
-        d_DC_mode = !is_use;
-    }
-
-    bool
-    gates_CNOT_impl::DC_mode() const{
-      return d_DC_mode;
-    }
-
-    void
-    gates_CNOT_impl::set_WAVE_port(bool is_use) {
-        d_WAVE_port = !is_use;
-    }
-
-    bool
-    gates_CNOT_impl::WAVE_port() const{
-      return d_WAVE_port;
-    }
-
-
-    int
-    gates_CNOT_impl::work(int noutput_items,
-                        gr_vector_const_void_star &input_items,
-                        gr_vector_void_star &output_items)
-    {
-      return noutput_items;
+      msg = pmt::dict_add(msg, pmt::from_float(pmt::length(msg)+1), CNOT->get_parameters());
+      message_port_pub(d_port_out, msg);
+      message_port_pub(d_port_CTRL, CNOT->get_parameters());
+      
     }
 
   } /* namespace quantum */

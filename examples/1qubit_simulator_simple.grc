@@ -1,760 +1,266 @@
-<?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.11'?>
-<flow_graph>
-  <timestamp>Thu Aug 22 09:50:05 2019</timestamp>
-  <block>
-    <key>options</key>
-    <param>
-      <key>author</key>
-      <value>Noritsuna Imamura(noritsuna@siprop.org)</value>
-    </param>
-    <param>
-      <key>window_size</key>
-      <value>1600,1200</value>
-    </param>
-    <param>
-      <key>category</key>
-      <value>[GRC Hier Blocks]</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>description</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 8)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>generate_options</key>
-      <value>qt_gui</value>
-    </param>
-    <param>
-      <key>hier_block_src_path</key>
-      <value>.:</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>one_qubit_simultor_simple</value>
-    </param>
-    <param>
-      <key>max_nouts</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>qt_qss_theme</key>
-      <value></value>
-    </param>
-    <param>
-      <key>realtime_scheduling</key>
-      <value></value>
-    </param>
-    <param>
-      <key>run_command</key>
-      <value>{python} -u {filename}</value>
-    </param>
-    <param>
-      <key>run_options</key>
-      <value>prompt</value>
-    </param>
-    <param>
-      <key>run</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>thread_safe_setters</key>
-      <value></value>
-    </param>
-    <param>
-      <key>title</key>
-      <value>Simple 1Qubit Simultor</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(8, 160)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>32000</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_message_debug</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1472, 296)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_message_debug_0</value>
-    </param>
-  </block>
-  <block>
-    <key>quantum_controllers_Coprocessor</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>H_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>INIT_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>RO_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>S_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>T_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>X_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Y_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Z_freq</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(696, 304)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>H_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>INIT_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>RO_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>S_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>T_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>X_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Y_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Z_I_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>H_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>INIT_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>RO_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>S_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>T_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>X_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Y_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Z_I_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>quantum_controllers_Coprocessor_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>H_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>INIT_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>RO_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>S_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>T_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>X_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Y_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Z_proc_time</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>H_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>INIT_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>RO_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>S_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>T_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>X_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Y_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Z_Q_amp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>H_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>INIT_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>RO_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>S_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>T_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>X_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Y_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>Z_Q_bw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>qubit_id</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>showSyncPort</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>scale_rate</key>
-      <value>1.0</value>
-    </param>
-  </block>
-  <block>
-    <key>quantum_controllers_Initializer</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(24, 260)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>I_amp</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>I_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>quantum_controllers_Initializer_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>proc_time</key>
-      <value>10000</value>
-    </param>
-    <param>
-      <key>Q_amp</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>Q_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>qubit_id</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>showWAVEports</key>
-      <value>True</value>
-    </param>
-  </block>
-  <block>
-    <key>quantum_controllers_Simulator</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>center_RF</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1080, 304)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>quantum_controllers_Simulator_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>qubit_num</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>showSyncPort</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>scale_rate</key>
-      <value>1.0</value>
-    </param>
-  </block>
-  <block>
-    <key>quantum_controllers_readout</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(440, 268)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>I_amp</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>I_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>quantum_controllers_readout_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>proc_time</key>
-      <value>10000</value>
-    </param>
-    <param>
-      <key>Q_amp</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>Q_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>showWAVEports</key>
-      <value>True</value>
-    </param>
-  </block>
-  <block>
-    <key>quantum_gates_X</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>freq</key>
-      <value>1000</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(232, 268)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>I_amp</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>I_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>quantum_gates_X_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>proc_time</key>
-      <value>10000</value>
-    </param>
-    <param>
-      <key>Q_amp</key>
-      <value>1.0</value>
-    </param>
-    <param>
-      <key>Q_bw</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>showWAVEports</key>
-      <value>True</value>
-    </param>
-  </block>
-  <block>
-    <key>quantum_measurements_Detector</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1288, 320)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>quantum_measurements_Detector_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>showWAVEport</key>
-      <value>True</value>
-    </param>
-  </block>
-  <connection>
-    <source_block_id>quantum_controllers_Coprocessor_0</source_block_id>
-    <sink_block_id>quantum_controllers_Simulator_0</sink_block_id>
-    <source_key>1</source_key>
-    <sink_key>1</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>quantum_controllers_Coprocessor_0</source_block_id>
-    <sink_block_id>quantum_controllers_Simulator_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>quantum_controllers_Coprocessor_0</source_block_id>
-    <sink_block_id>quantum_controllers_Simulator_0</sink_block_id>
-    <source_key>2</source_key>
-    <sink_key>2</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>quantum_controllers_Initializer_0</source_block_id>
-    <sink_block_id>quantum_gates_X_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>quantum_controllers_Simulator_0</source_block_id>
-    <sink_block_id>quantum_measurements_Detector_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>quantum_controllers_readout_0</source_block_id>
-    <sink_block_id>quantum_controllers_Coprocessor_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>quantum_gates_X_0</source_block_id>
-    <sink_block_id>quantum_controllers_readout_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>in</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>quantum_measurements_Detector_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>result</source_key>
-    <sink_key>print</sink_key>
-  </connection>
-</flow_graph>
+options:
+  parameters:
+    author: Noritsuna Imamura(noritsuna@siprop.org)
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: one_qubit_simultor_simple
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Simple 1Qubit Simultor
+    window_size: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '32000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 160]
+    rotation: 0
+    state: enabled
+- name: blocks_message_debug_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1901, 75]
+    rotation: 0
+    state: true
+- name: quantum_controllers_Analyzer_0
+  id: quantum_controllers_Analyzer
+  parameters:
+    affinity: ''
+    alias: ''
+    amp_threshold_rate: '50.0'
+    bw_threshold_rate: '10.0'
+    comment: ''
+    freq_threshold_rate: '10.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    proc_time_threshold_rate: '10.0'
+    qubit_num: '1'
+    samples_per_second: samp_rate
+    scale_rate: '1000000000.0'
+    showSyncPort: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [918, 287]
+    rotation: 0
+    state: true
+- name: quantum_controllers_Coprocessor_0
+  id: quantum_controllers_Coprocessor
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    qubit_id: '0'
+    samples_per_second: samp_rate
+    scale_rate: '1000000000.0'
+    showSyncPort: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [691, 288]
+    rotation: 0
+    state: enabled
+- name: quantum_controllers_Generator_0
+  id: quantum_controllers_Generator
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    qubit_num: '1'
+    samples_per_second: samp_rate
+    scale_rate: '1000000000.0'
+    showSyncPort: 'False'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1475, 335]
+    rotation: 0
+    state: enabled
+- name: quantum_controllers_Initializer_0
+  id: quantum_controllers_Initializer
+  parameters:
+    I_amp: '0.1'
+    I_bw: '10'
+    Q_amp: '0.01'
+    Q_bw: '20'
+    affinity: ''
+    alias: ''
+    comment: ''
+    freq: '1000'
+    isFeedbackMode: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    proc_time: '3'
+    qubit_id: '1'
+    samples_per_second: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 260]
+    rotation: 0
+    state: enabled
+- name: quantum_controllers_QuTiP_Simulator_0
+  id: quantum_controllers_QuTiP_Simulator
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    qubit_noise_rate: '0.0'
+    qubit_num: '1'
+    scale_rate: '1000000000.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1242, 324]
+    rotation: 0
+    state: enabled
+- name: quantum_controllers_readout_0
+  id: quantum_controllers_readout
+  parameters:
+    I_amp: '0.008'
+    I_bw: '50'
+    Q_amp: '1.0'
+    Q_bw: '80'
+    affinity: ''
+    alias: ''
+    comment: ''
+    freq: '1500'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    proc_time: '4'
+    samples_per_second: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [447, 268]
+    rotation: 0
+    state: enabled
+- name: quantum_gates_X_0
+  id: quantum_gates_X
+  parameters:
+    I_amp: '0.04'
+    I_bw: '30'
+    Q_amp: '0.6'
+    Q_bw: '50'
+    affinity: ''
+    alias: ''
+    comment: ''
+    freq: '1200'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    proc_time: '5'
+    samples_per_second: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 268]
+    rotation: 0
+    state: enabled
+- name: quantum_measurements_Detector_0
+  id: quantum_measurements_Detector
+  parameters:
+    affinity: ''
+    alias: ''
+    amp_threshold_rate: '10.0'
+    bw_threshold_rate: '10.0'
+    comment: ''
+    freq_threshold_rate: '10.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    proc_time_threshold_rate: '10.0'
+    qubit_num: '1'
+    qubit_pole: 'True'
+    samples_per_second: samp_rate
+    scale_rate: '1000000000.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1696, 306]
+    rotation: 0
+    state: enabled
+- name: quantum_viewer_QuTiP_Bloch_0
+  id: quantum_viewer_QuTiP_Bloch
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    qubit_id: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2022, 351]
+    rotation: 0
+    state: enabled
+
+connections:
+- [quantum_controllers_Analyzer_0, analyzed_data, blocks_message_debug_0, print]
+- [quantum_controllers_Analyzer_0, analyzed_data, quantum_controllers_QuTiP_Simulator_0,
+  analyzed_data]
+- [quantum_controllers_Analyzer_0, out, blocks_message_debug_0, print]
+- [quantum_controllers_Analyzer_0, out, quantum_controllers_QuTiP_Simulator_0, in]
+- [quantum_controllers_Coprocessor_0, '0', quantum_controllers_Analyzer_0, '0']
+- [quantum_controllers_Coprocessor_0, '1', quantum_controllers_Analyzer_0, '1']
+- [quantum_controllers_Coprocessor_0, '2', quantum_controllers_Analyzer_0, '2']
+- [quantum_controllers_Coprocessor_0, out, quantum_controllers_Analyzer_0, in]
+- [quantum_controllers_Generator_0, '0', quantum_measurements_Detector_0, '0']
+- [quantum_controllers_Generator_0, out, quantum_measurements_Detector_0, in]
+- [quantum_controllers_Initializer_0, out, quantum_gates_X_0, in]
+- [quantum_controllers_QuTiP_Simulator_0, out, quantum_controllers_Generator_0, in]
+- [quantum_controllers_QuTiP_Simulator_0, simulated_data, quantum_controllers_Generator_0,
+  simulated_data]
+- [quantum_controllers_readout_0, out, quantum_controllers_Coprocessor_0, in]
+- [quantum_gates_X_0, out, quantum_controllers_readout_0, in]
+- [quantum_measurements_Detector_0, result, quantum_viewer_QuTiP_Bloch_0, result]
+
+metadata:
+  file_format: 1

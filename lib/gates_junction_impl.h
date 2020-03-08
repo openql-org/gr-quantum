@@ -23,8 +23,9 @@
 #ifndef INCLUDED_GR_QUANTUM_GATES_JUNCTION_IMPL_H
 #define INCLUDED_GR_QUANTUM_GATES_JUNCTION_IMPL_H
 
-#include <quantum/gate.h>
+#include <gate.h>
 #include <quantum/gates_junction.h>
+#include <gnuradio/logger.h>
 
 namespace gr {
   namespace quantum {
@@ -32,26 +33,42 @@ namespace gr {
     class gates_junction_impl : public gates_junction
     {
     private:
-      boost::system_time d_start;
-      double d_wait_time_ns;
+      bool d_DC_mode;
+      gate *JUNC;
+      const pmt::pmt_t d_port_out;
+      const pmt::pmt_t d_port_in;
+      const pmt::pmt_t d_CTRL_port;
+
+      bool is_recv_CTRL;
+      boost::mutex sleep_mutex;
+      boost::condition_variable sleep_condition;
+
+      gr::logger_ptr d_logger;
+      gr::logger_ptr d_debug_logger;
+
+      const float QUANTUM_JUNC_AMP_RATE = 2.0f;
 
     public:
-      gates_junction_impl(
-                   double wait_time);
+      gates_junction_impl(bool DC_mode,
+                   double frequency,
+                   double I_amplitude,
+                   double Q_amplitude,
+                   double I_bandwidth,
+                   double Q_bandwidth,
+                   double processing_time,
+                   double samples_per_sec);
       ~gates_junction_impl();
 
       // Overloading gr::block::start to reset timer
       bool start();
 
-      void set_wait_time_ns(double wait_time_ns);
-      double wait_time() const;
+      void set_DC_mode(bool is_use);
+      bool DC_mode() const;
 
       void handle_cmd_msg(pmt::pmt_t msg);
       void handle_CTRL_msg(pmt::pmt_t msg);
 
-      int work(int noutput_items,
-               gr_vector_const_void_star &input_items,
-               gr_vector_void_star &output_items);
+
     };
 
   } /* namespace quantum */

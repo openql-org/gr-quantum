@@ -22,7 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    gate.h
     gates_X.h
     gates_Y.h
     gates_Z.h
@@ -32,13 +31,16 @@ install(FILES
     gates_CNOT.h
     gates_junction.h
     controllers_Coprocessor.h
-    controllers_Simulator.h
+    controllers_Analyzer.h
+    controllers_Generator.h
     controllers_Initializer.h
+    controllers_gatesParams.h
     controllers_readout.h
     controllers_wait.h
     controllers_sync.h
-    measurements_Constellation.h
-    measurements_Bloch.h
+    controllers_callback_message.h
     measurements_Detector.h
+    API_OpenQL_Source.h
+    API_OpenQL_Sink.h
     DESTINATION include/quantum
 )

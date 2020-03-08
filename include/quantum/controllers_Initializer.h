@@ -24,7 +24,7 @@
 #define INCLUDED_GR_QUANTUM_CONTROLLERS_INITIALIZER_H
 
 #include <quantum/api.h>
-#include <gnuradio/sync_block.h>
+#include <gnuradio/block.h>
 
 namespace gr {
   namespace quantum {
@@ -38,7 +38,7 @@ namespace gr {
      * input: one messages; output: one message
      *
      */
-    class QUANTUM_API controllers_Initializer : virtual public sync_block
+    class QUANTUM_API controllers_Initializer : virtual public block
     {
     public:
       typedef boost::shared_ptr<controllers_Initializer> sptr;
@@ -52,70 +52,8 @@ namespace gr {
                        double Q_bandwidth,
                        double processing_time,
                        double samples_per_sec,
-                       bool show_WAVE_port=true);
+                       bool isFeedbackMode=false);
 
-/*
-      //! Sets I frequecy..
-      virtual void set_I_frequency(double freq) = 0;
-      
-      //! Get I frequecy..
-      virtual double I_frequency() = 0;
-
-      //! Sets Q frequecy..
-      virtual void set_Q_frequency(double freq) = 0;
-
-      //! Get Q frequecy..
-      virtual double Q_frequency() = 0;
-
-      //! Sets I amplitude..
-      virtual void set_I_amplitude(double amp) = 0;
-
-      //! Get I amplitude..
-      virtual double I_amplitude() = 0;
-
-      //! Sets Q amplitude..
-      virtual void set_Q_amplitude(double amp) = 0;
-
-      //! Get Q amplitude..
-      virtual double Q_amplitude() = 0;
-
-      //! Sets I bandwidth..
-      virtual void set_I_bandwidth(double bw) = 0;
-
-      //! Get I bandwidth..
-      virtual double I_bandwidth() = 0;
-
-      //! Sets Q bandwidth..
-      virtual void set_Q_bandwidth(double bw) = 0;
-
-      //! Get Q bandwidth..
-      virtual double Q_bandwidth() = 0;
-
-
-      //! Sets processing time(ns)..
-      virtual void set_processing_time_ns(double proc_time_ns) = 0;
-
-      //! Get processing time(ns)..
-      virtual double processing_time() = 0;
-
-      //! Sets the sample rate in samples per second.
-      virtual void set_sample_rate(double rate) = 0;
-
-      //! Get the sample rate in samples per second.
-      virtual double sample_rate() const = 0;
-
-*/
-      //! Sets Qubit ID number.
-      virtual void set_qubit_id(double qubit_id) = 0;
-
-      //! Gets Qubit ID number.
-      virtual double qubit_id() const = 0;
-
-      //! Sets using WAVE out.
-      virtual void set_WAVE_port(bool is_use) = 0;
-
-      //! Get using WAVE out.
-      virtual bool WAVE_port() const = 0;
     };
 
   } /* namespace quantum */

@@ -23,7 +23,7 @@
 #ifndef INCLUDED_GR_QUANTUM_CONTROLLERS_INITIALIZER_IMPL_H
 #define INCLUDED_GR_QUANTUM_CONTROLLERS_INITIALIZER_IMPL_H
 
-#include <quantum/gate.h>
+#include "gate.h"
 #include <quantum/controllers_Initializer.h>
 
 namespace gr {
@@ -35,15 +35,16 @@ namespace gr {
       double d_qubit_id;
       boost::system_time d_start;
       uint64_t d_total_samples;
-/*
-      double d_I_freq, d_Q_freq;
-      double d_I_amp, d_Q_amp;
-      double d_I_bw, d_Q_bw;
-      double d_proc_time_ns;
-      double d_samps_per_tick, d_samps_per_us;
-*/
-      bool d_WAVE_port;
+
+      bool d_feedback_mode;
+
       gate *INIT;
+      const pmt::pmt_t d_port_out;
+      const pmt::pmt_t d_port_in;
+      const pmt::pmt_t d_port_fb;
+
+      gr::logger_ptr d_logger;
+      gr::logger_ptr d_debug_logger;
 
     public:
       controllers_Initializer_impl(
@@ -55,50 +56,24 @@ namespace gr {
                    double Q_bandwidth,
                    double processing_time,
                    double samples_per_sec,
-                   bool show_WAVE_port=true);
+                   bool isFeedbackMode=false);
       ~controllers_Initializer_impl();
 
       // Overloading gr::block::start to reset timer
       bool start();
 
-/*
-      void set_I_frequency(double freq);
-      double I_frequency();
-
-      void set_Q_frequency(double freq);
-      double Q_frequency();
-
-      void set_I_amplitude(double amp);
-      double I_amplitude();
-
-      void set_Q_amplitude(double amp);
-      double Q_amplitude();
-
-      void set_I_bandwidth(double bw);
-      double I_bandwidth();
-
-      void set_Q_bandwidth(double bw);
-      double Q_bandwidth();
-
-      void set_processing_time_ns(double proc_time_ns);
-      double processing_time();
-      void set_sample_rate(double rate);
-      double sample_rate() const;
-*/
-
-      void set_WAVE_port(bool is_use);
-      bool WAVE_port() const;
+      void set_feedback_mode(bool mode);
+      bool is_feedback_mode() const;
 
       void set_qubit_id(double qubit_id);
       double qubit_id() const;
 
       void handle_cmd_msg(pmt::pmt_t msg);
+      void handle_fb_msg(pmt::pmt_t msg);
 
-      int work(int noutput_items,
-               gr_vector_const_void_star &input_items,
-               gr_vector_void_star &output_items);
+      bool check_topology(int ninputs, int noutputs);
+
     };
-
   } /* namespace quantum */
 } /* namespace gr */
 

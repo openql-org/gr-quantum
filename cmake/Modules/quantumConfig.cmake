@@ -22,7 +22,9 @@ FIND_LIBRARY(
           /usr/local/lib64
           /usr/lib
           /usr/lib64
-)
+          )
+
+include("${CMAKE_CURRENT_LIST_DIR}/quantumTarget.cmake")
 
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(QUANTUM DEFAULT_MSG QUANTUM_LIBRARIES QUANTUM_INCLUDE_DIRS)
