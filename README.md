@@ -36,9 +36,9 @@ Forth, Please edit setup_env.sh file for GNU Radio.
 
     ~/gnuradio/gnuradio38/setup_env.sh
 
-> Change "python2.6" paths to "python3.6" in PYTHONPATH.
-> Delete "python2.7" paths in PYTHONPATH.
-> Add "python3" paths in PYTHONPATH.
+> Change "python2.6" paths to "python3.6" in PYTHONPATH.  
+> Delete "python2.7" paths in PYTHONPATH.  
+> Add "python3" paths in PYTHONPATH.  
 
     export PYTHONPATH="/home/siprop/gnuradio/gnuradio38/python:/home/siprop/gnuradio/gnuradio38/lib/python3.6/site-packages:/home/siprop/gnuradio/gnuradio38/lib64/python3.6/site-packages:/home/siprop/gnuradio/gnuradio38/lib/python3.6/dist-packages:/home/siprop/gnuradio/gnuradio38/lib64/python3.6/dist-packages:/home/siprop/gnuradio/gnuradio38/lib/python3/site-packages:/home/siprop/gnuradio/gnuradio38/lib64/python3/site-packages:/home/siprop/gnuradio/gnuradio38/lib/python3/dist-packages:/home/siprop/gnuradio/gnuradio38/lib64/python3/dist-packages$PYTHONPATH"
 
@@ -166,7 +166,9 @@ Required dependencies:
 1. Setup a Simulator Part. The Simulator Part is composed by the Qubit Analyzer Block, the QuTiP Qubit Simulator Blcok, the Qubit RO Generator Block.
 1. Setup a View Qubit Part. The View Qubit Poart is composed by the Qubit Detector Block and the QuTiP Bloch Block.
 
+<p align="center">
 <img src="./images/one_qubit_simple.PNG" width="75%" />
+</p>
 
   * [1qubit_simulator_simple.grc](./examples/1qubit_simulator_simple.grc)
 
@@ -178,7 +180,9 @@ Required dependencies:
 1. Connect the Qubit Detector Block from SDR's source. And Setup a center Frequency for the Real Quantum Computer.
 1. Setup a View Qubit Part. The View Qubit Poart is composed by the Qubit Detector Block.
 
+<p align="center">
 <img src="./images/one_qubit_SDR.PNG" width="75%" />
+</p>
 
   * [1qubit_simulator_SDR.grc](./examples/1qubit_simulator_SDR.grc)
 
@@ -188,7 +192,9 @@ Required dependencies:
 1. Setup a Simulator Part. The Simulator Part is composed by the Qubit Analyzer Block, the QuTiP Qubit Simulator Blcok, the Qubit RO Generator Block.
 1. Setup a Return Qubit Part. The Return Qubit Poart is composed by the Qubit Detector Block and the OpenQL Sink Block.
 
+<p align="center">
 <img src="./images/one_qubit_compiler.PNG" width="75%" />
+</p>
 
   * [1qubit_simulator_compiler.grc](./examples/1qubit_simulator_compiler.grc)
 
