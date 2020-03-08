@@ -14,7 +14,7 @@ These blocks require the GNU Radio 3.8.0.0 or new with the Python 3.6 on Ubuntu 
 First, Please build and setup GNU Radio from source code with Python 3.6.
 
     ```
-    $ sudo apt install git cmake g++ libboost-all-dev libgmp-dev swig python3 python3-dev python3-pip python3-numpy python3-mako python3-sphinx python3-lxml doxygen libfftw3-dev libcomedi-dev libsdl1.2-dev libgsl-dev libqwt-qt5-dev libqt5opengl5-dev python3-pyqt5 liblog4cpp5-dev libzmq3-dev python3-yaml python3-click python3-click-plugins
+    $ sudo apt install git cmake g++ libboost-all-dev libgmp-dev libcppunit-dev swig python3 python3-dev python3-pip python3-numpy python3-mako python3-sphinx python3-lxml doxygen libfftw3-dev libcomedi-dev libsdl1.2-dev libgsl-dev libqwt-qt5-dev libqt5opengl5-dev python3-pyqt5 liblog4cpp5-dev libzmq3-dev python3-yaml python3-click python3-click-plugins
     $ sudo pip uninstall pybombs
     $ sudo pip3 install pybombs
     $ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
@@ -38,7 +38,7 @@ Third, Please initialize PYBOMBS.
 Forth, Please edit setup_env.sh file for GNU Radio. 
     ```
     ~/gnuradio/gnuradio38/setup_env.sh
-    ```
+    ```pybombs prefix init ~/gnuradio/gnuradio38
 > Change "python2.6" paths to "python3.6" in PYTHONPATH.
 > Delete "python2.7" paths in PYTHONPATH.
 > Add "python3" paths in PYTHONPATH.
