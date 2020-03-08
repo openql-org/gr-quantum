@@ -51,8 +51,7 @@ Fifth, Please build the GNU Radio.
 
 ### Build QuTiP
 First, Please build and setup QuTiP from source code .  
- * [QuTiP](http://qutip.org/)
-
+* [QuTiP](http://qutip.org/)
 
     $ sudo apt install libomp-dev
     $ sudo pip3 install numpy scipy cython matplotlib pytest pytest-cov jupyter notebook spyder
@@ -66,8 +65,7 @@ First, Please build and setup QuTiP from source code .
 
 ### Build GR-Quantum
 First, Please setup OSC library.  
-  * [liboscpack1](https://packages.ubuntu.com/xenial/libs/liboscpack1)
-
+* [liboscpack1](https://packages.ubuntu.com/xenial/libs/liboscpack1)
 
     $ sudo apt install liboscpack1 liboscpack-dev
 
