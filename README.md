@@ -53,6 +53,7 @@ Fifth, Please build the GNU Radio.
 First, Please build and setup QuTiP from source code .  
  * [QuTiP](http://qutip.org/)
 
+
     $ sudo apt install libomp-dev
     $ sudo pip3 install numpy scipy cython matplotlib pytest pytest-cov jupyter notebook spyder
     $ mkdir ~/qutip
@@ -67,10 +68,12 @@ First, Please build and setup QuTiP from source code .
 First, Please setup OSC library.  
   * [liboscpack1](https://packages.ubuntu.com/xenial/libs/liboscpack1)
 
+
     $ sudo apt install liboscpack1 liboscpack-dev
 
 
 Second, Please build and setup GR-Quantum library for GNU Radio.  
+
     $ cd ~/gnuradio
     $ git clone https://github.com/openql-org/gr-quantum
     $ cd gr-quantum
@@ -83,6 +86,7 @@ Second, Please build and setup GR-Quantum library for GNU Radio.
 
 ### Run GNU Radio with GR-Quantum
 Load Environment Variables and Run gnuradio-companion.  
+
     $ source ~/gnuradio/gnuradio38/setup_env.sh
     $ gnuradio-companion
 
