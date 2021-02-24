@@ -26,6 +26,7 @@
 
 #include "controllers_gatesParams_impl.h"
 #include <gnuradio/io_signature.h>
+#include <boost/thread/thread.hpp>
 #include <cstring>
 #include <limits>
 
@@ -33,13 +34,13 @@ namespace gr {
   namespace quantum {
 
     controllers_gatesParams::sptr
-    controllers_gatesParams::make(double qubit_id)
+    controllers_gatesParams::make(double qubit_id, std::string wave_type)
     {
       return gnuradio::get_initial_sptr
-        (new controllers_gatesParams_impl(qubit_id));
+        (new controllers_gatesParams_impl(qubit_id, wave_type));
     }
 
-    controllers_gatesParams_impl::controllers_gatesParams_impl(double qubit_id)
+    controllers_gatesParams_impl::controllers_gatesParams_impl(double qubit_id, std::string wave_type)
       : block("controllers_gatesParams",
                       io_signature::make(0, 0, 0),
                       io_signature::make(0, 0, 0)),
@@ -48,6 +49,7 @@ namespace gr {
     {
       configure_default_loggers(d_logger, d_debug_logger, "Gate Params");
       set_qubit_id(qubit_id);
+      set_wave_type(wave_type);
       message_port_register_in(d_port_in);
       set_msg_handler(d_port_in, boost::bind(&controllers_gatesParams_impl::handle_cmd_msg, this, _1));
 
@@ -106,52 +108,221 @@ namespace gr {
     }
 
     void
+    controllers_gatesParams_impl::set_wave_type(std::string wave_type)
+    {
+      d_wave_type = gate::convert_wave_type(wave_type);
+    }
+    gate::wave_type_t
+    controllers_gatesParams_impl::wave_type()
+    {
+      return d_wave_type;
+    }
+
+
+    void
     controllers_gatesParams_impl::handle_cmd_msg(pmt::pmt_t msg)
     {
-      message_port_pub(d_port_out, msg);
+      gate* _gate;
+
+      pmt::pmt_t type_value = pmt::dict_ref(msg, pmt::from_float(gate::GATE_TYPE), pmt::PMT_NIL);
+      int type_int = (int)(pmt::to_float(type_value));
+
+      pmt::pmt_t id_value = pmt::dict_ref(msg, pmt::from_float(gate::QUBIT_ID), pmt::PMT_NIL);
+      int id_int = (int)(pmt::to_float(id_value));
+
+      switch(type_int) {
+        case gate::INIT:
+          _gate = INIT;
+          break;
+        case gate::X:
+          _gate = X_gate;
+          break;
+        case gate::Y:
+          _gate = Y_gate;
+          break;
+        case gate::Z:
+          _gate = Z_gate;
+          break;
+        case gate::H:
+          _gate = H_gate;
+          break;
+        case gate::T:
+          _gate = T_gate;
+          break;
+        case gate::S:
+          _gate = S_gate;
+          break;
+        case gate::RO:
+          _gate = RO;
+          break;
+        case gate::CNOT:
+          _gate = CNOT;
+          break;
+        case gate::JUNC:
+          _gate = JUNC;
+          break;
+        default:
+          _gate = INIT;
+          break;
+      }
+      pmt::pmt_t send_msg = pmt::make_dict();
+      _gate->set_qubit_ID(id_int);
+      send_msg = pmt::dict_add(send_msg, pmt::from_float(1), _gate->get_parameters());
+      message_port_pub(d_port_out, send_msg);
+
     }
 
 
     void
-    controllers_gatesParams_impl::set_INIT_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      INIT = new gate(gate::INIT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id());
+    controllers_gatesParams_impl::set_INIT_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        INIT = new gate(gate::INIT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id());
+        break;
+      case gate::ARRAY:
+        INIT = new gate(gate::INIT, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec, qubit_id());
+        break;
+      default:
+        INIT = new gate(gate::INIT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id());
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_RO_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      RO = new gate(gate::RO, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_gatesParams_impl::set_RO_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        RO = new gate(gate::RO, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      case gate::ARRAY:
+        RO = new gate(gate::RO, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec);
+        break;
+      default:
+        RO = new gate(gate::RO, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      }
     }
 
     void
-    controllers_gatesParams_impl::set_X_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      X_gate = new gate(gate::X, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_gatesParams_impl::set_X_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        X_gate = new gate(gate::X, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      case gate::ARRAY:
+        X_gate = new gate(gate::X, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec);
+        break;
+      default:
+        X_gate = new gate(gate::X, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_Y_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      Y_gate = new gate(gate::Y, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_gatesParams_impl::set_Y_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        Y_gate = new gate(gate::Y, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      case gate::ARRAY:
+        Y_gate = new gate(gate::Y, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec);
+        break;
+      default:
+        Y_gate = new gate(gate::Y, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_Z_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      Z_gate = new gate(gate::Z, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_gatesParams_impl::set_Z_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        Z_gate = new gate(gate::Z, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      case gate::ARRAY:
+        Z_gate = new gate(gate::Z, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec);
+        break;
+      default:
+        Z_gate = new gate(gate::Z, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_H_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      H_gate = new gate(gate::H, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_gatesParams_impl::set_H_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        H_gate = new gate(gate::H, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      case gate::ARRAY:
+        H_gate = new gate(gate::H, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec);
+        break;
+      default:
+        H_gate = new gate(gate::H, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_T_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      T_gate = new gate(gate::T, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_gatesParams_impl::set_T_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        T_gate = new gate(gate::T, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      case gate::ARRAY:
+        T_gate = new gate(gate::T, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec);
+        break;
+      default:
+        T_gate = new gate(gate::T, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_S_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec) {
-      S_gate = new gate(gate::S, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+    controllers_gatesParams_impl::set_S_gate_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        S_gate = new gate(gate::S, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      case gate::ARRAY:
+        S_gate = new gate(gate::S, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec);
+        break;
+      default:
+        S_gate = new gate(gate::S, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec);
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_CNOT_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, bool ctrl_dc_mode) {
-      CNOT = new gate(gate::CNOT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id(), ctrl_dc_mode);
+    controllers_gatesParams_impl::set_CNOT_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type, bool ctrl_dc_mode) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        CNOT = new gate(gate::CNOT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id(), ctrl_dc_mode);
+        break;
+      case gate::ARRAY:
+        CNOT = new gate(gate::CNOT, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec, qubit_id(), ctrl_dc_mode);
+        break;
+      default:
+        CNOT = new gate(gate::CNOT, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id(), ctrl_dc_mode);
+        break;
+      }
     }
     void
-    controllers_gatesParams_impl::set_JUNC_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, bool ctrl_dc_mode) {
-      JUNC = new gate(gate::JUNC, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id(), ctrl_dc_mode);
+    controllers_gatesParams_impl::set_JUNC_parameters(double frequency, double I_amplitude, double Q_amplitude, double I_bandwidth, double Q_bandwidth, double processing_time, double samples_per_sec, const char* wave_file_path, std::string wave_file_type,  bool ctrl_dc_mode) {
+      switch (wave_type())
+      {
+      case gate::FREQ_COMV:
+        JUNC = new gate(gate::JUNC, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id(), ctrl_dc_mode);
+        break;
+      case gate::ARRAY:
+        JUNC = new gate(gate::JUNC, wave_file_path, gate::convert_wave_file_type(wave_file_type), samples_per_sec, qubit_id(), ctrl_dc_mode);
+        break;
+      default:
+        JUNC = new gate(gate::JUNC, frequency, I_amplitude, Q_amplitude, I_bandwidth, Q_bandwidth, processing_time, samples_per_sec, qubit_id(), ctrl_dc_mode);
+        break;
+      }
     }
 
   } /* namespace quantum */
